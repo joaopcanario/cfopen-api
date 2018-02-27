@@ -1,0 +1,13 @@
+Microservice Version
+Shows the current microservice version.
+
+__Response Model__
+
+<span style="margin-left:2em">__response__: Microservice version</span>
+
+---
+tags:
+  - Debug
+responses:
+  200:
+    description: Ok

@@ -1,0 +1,13 @@
+Brazil affiliates
+Get athletes leaderboard
+
+__Response Model__
+
+<span style="margin-left:2em">__response__: Athletes list.</span>
+
+---
+tags:
+  - Open
+responses:
+  200:
+    description:  Athletes list

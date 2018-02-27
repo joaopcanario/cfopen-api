@@ -1,0 +1,41 @@
+**Open 2018 custom leaderboards REST API**
+
+# Introduction
+## Finalidade do documento e considerações sobre o idioma
+
+Esse documento descreve a API dos leaderboards customizados para a fase do Open do Reebok Crossfit Games 2018. Cada funcionalidade deve conter uma breve descrição de uso, indicando formato e códigos de retorno em diferentes situações.
+
+This document describes the custom leaderboard API for Open phase of Reebok Crossfit Games 2018. Each feature should contain a brief description of usage, indicating format and return codes in different situations.
+
+_Nota:_ Apesar da introdução estar descrita em português e inglês, as demais partes da documentação serão escritas somente em inglês para facilitar a portabilidade do documento.
+
+_Note:_ Although the introduction is described in portuguese as english as well, the other documentation sections will only use english for easy document portability.
+
+# General principles
+## Content types and status codes
+
+The microservice provides a set of public `REST` endpoints, using a standard naming convention, a common authentication mechanism and follows the standard `REST` principles. As ageneral, the service accepts and returns a `JSON` document. In case of error the service returns a `400` status code and the returned documents contains a field `error` with a brief summary of the problem and a field `message` with the long description. Otherwise, returns a `200` status code, and a `JSON` document with requested information. If no information is requested, the `JSON` doc contains at least the standard `200` status code. Other status codes should respect the convention specified for the`HTTP` protocol.
+
+A request to the microservice will always returns a `JSON` document, accepts `JSON` as well for data input, and requires a `content-type`header parameter set to `application/json`. No content negotiation is currently available. The methods described by this documentation are only accessible to any authenticated microservice user. The default authentication method is described on the sections bellow.
+
+## Naming conventions
+
+The `REST` URLs take the general form:
+
+  ```
+  http://$address/api/v1/$serviceFamily/$endpoint?{queryParams}
+  ```
+
+URLs always start with `/api/v1` and the service family name, followed by a required sub-service and several optional query parameters. Case should never affect the return code of the services here described (case-insensitive).
+
+## Service families
+
+The following service families available :
+
+  1. __debug__: Gives access to system technical information and system healthy as well __(not fully implemented yet)__.
+
+  2. __open__: Performs operations to manipulate the customs leaderboards for the Reebok Crossfit Open 2018.
+
+  2. __core__: Perform basic microservice operations.
+
+The methods that belongs to the `debug` family are available only for developers (internal use) and the all other services should be available for service clients.
