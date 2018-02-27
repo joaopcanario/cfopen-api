@@ -1,5 +1,4 @@
-from flask import Blueprint, jsonify, request
-from flask import current_app as app
+from flask import Blueprint, jsonify
 
 
 core_bp = Blueprint("core_bp", __name__)
