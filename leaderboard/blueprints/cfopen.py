@@ -4,11 +4,13 @@ from flask import Blueprint, jsonify, request
 # from bson.objectid import ObjectId
 
 from leaderboard.database import connect
+from bson.json_util import dumps
+
 # from leaderboard.championship import CFGamesBoard
 
 # from pymongo import UpdateOne
 
-# import collections
+import collections
 # import requests
 # import ast
 
@@ -94,6 +96,11 @@ def leaderboards():
     uuid = request.args.get('uuid')
     division = request.args.get('division')
 
-    ranking = mongo.rankingdb.find({"uuid": uuid, "division": division})
+    filter_search = {"uuid": f"{uuid}_{division}"}
+    result = connect("MONGO_READONLY").rankingdb.find(filter_search)
 
-    return jsonify(response=ranking), 200
+    Leaderboard = collections.namedtuple('Leaderboard', 'id name ranking')
+    response = [Leaderboard(str(r['uuid']), r['name'], r['athletes'])._asdict()
+                for r in result]
+
+    return jsonify(response=response), 200
