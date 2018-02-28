@@ -14,14 +14,41 @@ def leaderboards():
     Brazil custom leaderboards
     Get state or region leaderboards filtered by divisions, male or female.
 
+    __Available leaderboards__
+
+    - Bahia
+
+    __Available Divisions__
+
+    - Masculino
+    - Feminino
+    - Boys (14-15)
+    - Girls (14-15)
+    - Boys (16-17)
+    - Girls (16-17)
+    - Men (18-34)
+    - Women (18-34)
+    - Men (35-39)
+    - Women (35-39)
+    - Men (40-44)
+    - Women (40-44)
+    - Men (45-49)
+    - Women (45-49)
+    - Men (50-54)
+    - Women (50-54)
+    - Men (55-59)
+    - Women (55-59)
+    - Men (60+)
+    - Women (60+)
+
     ---
     tags:
       - Open
     summary: Get custom leaderboard
     parameters:
-      - name: uuid
+      - name: name
         in: query
-        description: The board unique identifier.
+        description: The board name.
         type: string
         required: true
       - name: division
@@ -60,15 +87,21 @@ def leaderboards():
                                                 score:
                                                     type: string
     '''
-    uuid = request.args.get('uuid')
+    name = request.args.get('name')
     division = request.args.get('division')
 
-    if not uuid or not division:
-        return jsonify(f'Missing required parameters: uuid={uuid}, '
+    mongo = connect("MONGO_READONLY")
+
+    if not name or not division:
+        return jsonify(f'Missing required parameters: name={name}, '
                        f'division={division}'), 200
 
-    filter_search = {"uuid": f"{uuid}_{division}"}
-    result = connect("MONGO_READONLY").rankingdb.find(filter_search)
+    result = mongo.entitydb.find_one({"name": name})
+
+    print(f"{result['_id']}_{division}")
+
+    filter_search = {"uuid": f"{result['_id']}_{division}"}
+    result = mongo.rankingdb.find(filter_search)
 
     response = []
 
