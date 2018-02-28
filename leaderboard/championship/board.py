@@ -30,7 +30,7 @@ divisions = {1: 'Men (18-34)', 2: 'Women (18-34)',
 # 2018
 max_reps = [0, 0, 0, 0, 0]
 
-Ranking = namedtuple('Ranking', 'uuid name athletes')
+Ranking = namedtuple('Ranking', 'uuid name last_update athletes')
 
 dumb_score = {"ordinal": 1, "rank": "", "score": "0", "scoreDisplay": "",
               "mobileScoreDisplay": "", "scoreIdentifier": "", "scaled": "0",
@@ -48,22 +48,22 @@ class Base(object):
 
 
 class Score(Base):
-    def __init__(self, ordinal, score, dumb=False):
+    def __init__(self, ordinal, score, dumb):
         super().__init__()
 
         self.ordinal = ordinal
-        self.display = score.get("scoreDisplay")
-        # self.wod_score = self._score_from_display()
+        self.scoreDisplay = score.get("scoreDisplay")
+        # self.score = self._score_from_display()
 
-        # if score.get("scoredetails"):
-        #     self.tiebreak = score.get("scoredetails").get('time', 'null')
+        # if score.get("score"):
+        #     self.tiebreak = score.get("score").get('time', 'null')
         # else:
         #     self.tiebreak = "null"
 
-        self.wod_score = score.get("score")
-        self.tiebreak = self.wod_score
+        self.score = score.get("score")
+        self.tiebreak = self.score
 
-        self.scale = score.get("scaled") == "1"
+        self.scaled = ' - s' in self.scoreDisplay
         self.rank = 0
 
         self.dumb = dumb
@@ -72,32 +72,35 @@ class Score(Base):
         import re
 
         pattern = re.compile(r'( - s)|( reps)')
-        self.display = pattern.sub("", self.display)
+        self.scoreDisplay = pattern.sub("", self.scoreDisplay)
 
-        if ':' in self.display:
-            ddisplay = enumerate(reversed(self.display.split(":")))
+        if ':' in self.scoreDisplay:
+            ddisplay = enumerate(reversed(self.scoreDisplay.split(":")))
             seconds = sum(int(x) * 60 ** i for i, x in ddisplay)
+
             return (max_reps[self.ordinal] / seconds) + max_reps[self.ordinal]
 
-        return int(self.display)
+        return int(self.scoreDisplay)
 
 
 class Athlete(Base):
-    def __init__(self, user_id, name, affiliate, division, profile_pic,
-                 scores, overallscore=0):
+    def __init__(self, competitorId, competitorName, affiliateName,
+                 division, profilePic,
+                 scores, overallScore=0):
         super().__init__()
 
         _profilepicsbucket = "https://profilepicsbucket.crossfit.com"
 
-        self.user_id = user_id
-        self.name = name
-        self.affiliate = affiliate
+        self.competitorId = competitorId
+        self.competitorName = competitorName
+        self.affiliateName = affiliateName
 
-        self.division = divisions.get(int(division))
-        self.profile_pic = f"{_profilepicsbucket}/{profile_pic}"
-        self.overallscore = overallscore
+        self.divisionId = division
+        self.division = divisions.get(int(self.divisionId))
+        self.profilePic = f"{_profilepicsbucket}/{profilePic}"
+        self.overallScore = overallScore
 
-        self.scores = [Score(ordinal, score).asdict()
+        self.scores = [Score(ordinal, score, score.get("dumb", False)).asdict()
                        for ordinal, score in enumerate(scores)]
 
         for i in range(len(self.scores), 5):
@@ -117,21 +120,21 @@ class Board(Base):
         for w in range(0, 5):
             # RX
             rx = [athlete for athlete in board
-                  if not athlete["scores"][w]['scale'] and
+                  if not athlete["scores"][w]['scaled'] and
                      not athlete["scores"][w]['tiebreak'] == 'null' and
                      not athlete["scores"][w]['dumb']]
             rx = sorted(rx,
-                        key=lambda x: (x["scores"][w]['wod_score'],
+                        key=lambda x: (x["scores"][w]['score'],
                                        x["scores"][w]['tiebreak']),
                         reverse=True)
 
             # SCALE
             scale = [athlete for athlete in board
-                     if athlete["scores"][w]['scale'] and
+                     if athlete["scores"][w]['scaled'] and
                         not athlete["scores"][w]['tiebreak'] == 'null' and
                         not athlete["scores"][w]['dumb']]
             scale = sorted(scale,
-                           key=lambda x: (x["scores"][w]['wod_score'],
+                           key=lambda x: (x["scores"][w]['score'],
                                           x["scores"][w]['tiebreak']),
                            reverse=True)
 
@@ -144,41 +147,52 @@ class Board(Base):
 
         # OVERALL SCORE
         for athlete in board:
-            athlete["overallscore"] = sum([athlete['scores'][w]["rank"]
+            athlete["overallScore"] = sum([athlete['scores'][w]["rank"]
                                            for w in range(0, 5)])
 
-        return sorted(board, key=lambda x: x['overallscore'])
+        return sorted(board, key=lambda x: x['overallScore'])
 
-    def _update_athletes_rank(self, all_athletes, wod_score):
+    def _update_athletes_rank(self, all_athletes, score):
         prev_rank = 1
         prev_score = (0, 0)
 
         for position, athlete in enumerate(all_athletes):
-            atl_wod = athlete["scores"][wod_score]
+            atl_wod = athlete["scores"][score]
             rank = position + 1
 
-            actual_score = (atl_wod["wod_score"], atl_wod["tiebreak"])
+            actual_score = (atl_wod["score"], atl_wod["tiebreak"])
 
             if actual_score == prev_score:
                 rank = prev_rank
             else:
                 prev_rank = rank
 
-            prev_score = (atl_wod["wod_score"], atl_wod["tiebreak"])
+            prev_score = (atl_wod["score"], atl_wod["tiebreak"])
             atl_wod["rank"] = rank
 
     def generate_ranks(self, uuid):
+        from datetime import datetime
+
         for key, div in divisions.items():
-            board = [athlete for athlete in self.athletes
+            board = [Athlete(athlete["competitorId"],
+                             athlete["competitorName"],
+                             athlete["affiliateName"],
+                             athlete["divisionId"],
+                             athlete["profilePic"],
+                             athlete["scores"]).asdict()
+                     for athlete in self.athletes
                      if athlete['division'] in div]
 
             if key in ["Masculino", "Feminino"]:
                 div = key
 
             board = self._sort(board)
-
             self.boards[div] = board
-            self.ranks.append(Ranking(f"{uuid}_" + div, div, board))
+
+            last_update = datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')
+
+            ranking = Ranking(f"{uuid}_" + div, div, last_update, board)
+            self.ranks.append(ranking)
 
 
 class CFGamesBoard(Board):

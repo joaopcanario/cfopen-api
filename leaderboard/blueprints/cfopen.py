@@ -75,15 +75,15 @@ def leaderboards():
     for r in result:
         for athlete in r['athletes']:
             scores = [{'rank': score['rank'],
-                        'scoreDisplay': score['display'],
-                        'score': score['wod_score']
+                        'scoreDisplay': score['scoreDisplay'],
+                        'score': score['score']
                       } for score in athlete['scores']]
 
             response.append({
-                'affiliateName': athlete['user_id'],
-                'competitorName': athlete['name'],
-                'overallScore': athlete['overallscore'],
-                'profilePic': athlete['profile_pic'],
+                'affiliateName': athlete['affiliateName'],
+                'competitorName': athlete['competitorName'],
+                'overallScore': athlete['overallScore'],
+                'profilePic': athlete['profilePic'],
                 'scores': scores
             })
 
