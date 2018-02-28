@@ -8,15 +8,40 @@ debug_bp = Blueprint("debug_bp", __name__)
 
 @debug_bp.route('/ping')
 def ping():
-    """
-    file: docs/dbg_ping.yml
-    """
-    return jsonify(response="Pong!"), 200
+    '''
+    Ping
+    Checks API connectivity.
+
+    __Response Model__
+
+    <span style="margin-left:2em">__response__: Connectivity message</span>
+
+    ---
+    tags:
+      - Debug
+    responses:
+      200:
+        description: Ok
+        type: string
+    '''
+    return jsonify("Pong!"), 200
 
 
 @debug_bp.route('/version')
 def version():
-    """
-    file: docs/dbg_version.yml
-    """
-    return jsonify(response=f"App version: {leaderboard.version}"), 200
+    '''
+    Microservice Version
+    Shows microservice current version.
+
+    __Response Model__
+
+    <span style="margin-left:2em">__response__: Microservice version</span>
+
+    ---
+    tags:
+      - Debug
+    responses:
+      200:
+        description: Ok
+    '''
+    return jsonify(f"API version: {leaderboard.version}"), 200

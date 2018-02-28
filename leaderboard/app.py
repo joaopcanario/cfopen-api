@@ -23,7 +23,7 @@ def init_celery(app):
     celery.Task = ContextTask
 
 
-def create_app():
+def create_app(in_celery=False, in_swagger=False):
     '''App creation'''
 
     # Initialization
@@ -34,6 +34,12 @@ def create_app():
     app.register_blueprint(core)
     app.register_blueprint(debug, url_prefix='/api/v1/debug')
     app.register_blueprint(cfopen, url_prefix='/api/v1/open')
+
+    if in_swagger:
+        init_celery(app)
+
+    if in_swagger:
+        app = config_swagger(app)
 
     return app
 
@@ -46,13 +52,13 @@ def config_swagger(app):
     app.config['SWAGGER'] = {
         "version": "2.0",
         "title": "Reebok CrossFit Games - Open Custom Leaderboard",
-        "schemes": ["http"],
-        "consumes": ["application/json", "multipart/form-data"],
-        "produces": ["application/json"],
-        "specs": [{"version": leaderboard.version,
-                   "title": "API Spec v" + leaderboard.version,
-                   "endpoint": 'spec',
-                   "route": '/spec',
-                   "description": specs_description.read()}]}
+        "specs": [{
+            "version": leaderboard.version,
+            "title": f"API Spec v{leaderboard.version}",
+            "endpoint": 'spec',
+            "route": '/spec',
+            "description": specs_description.read()
+        }]
+    }
 
     return app

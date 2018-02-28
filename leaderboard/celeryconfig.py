@@ -13,6 +13,6 @@ CELERYBEAT_SCHEDULE = {
     'refresh_leaderboards': {
         'task': 'leaderboard.tasks.refresh_boards',
         # Every minute
-        'schedule': crontab(minute=0, hour=0, day_of_week='0,1,4,5,6'),
+        'schedule': crontab(minute=0, hour=0),
     }
 }

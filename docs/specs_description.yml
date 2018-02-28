@@ -5,11 +5,11 @@
 
 Esse documento descreve a API dos leaderboards customizados para a fase do Open do Reebok Crossfit Games 2018. Cada funcionalidade deve conter uma breve descrição de uso, indicando formato e códigos de retorno em diferentes situações.
 
+_Nota:_ Apesar da introdução estar descrita em português e inglês, o resto da documentação sera somente em inglês para facilitar a portabilidade.
+
 This document describes the custom leaderboard API for Open phase of Reebok Crossfit Games 2018. Each feature should contain a brief description of usage, indicating format and return codes in different situations.
 
-_Nota:_ Apesar da introdução estar descrita em português e inglês, as demais partes da documentação serão escritas somente em inglês para facilitar a portabilidade do documento.
-
-_Note:_ Although the introduction is described in portuguese as english as well, the other documentation sections will only use english for easy document portability.
+_Note:_ Although the introduction is described in portuguese as english as well, others sections will only use english for easy portability.
 
 # General principles
 ## Content types and status codes
@@ -36,6 +36,4 @@ The following service families available :
 
   2. __open__: Performs operations to manipulate the customs leaderboards for the Reebok Crossfit Open 2018.
 
-  2. __core__: Perform basic microservice operations.
-
-The methods that belongs to the `debug` family are available only for developers (internal use) and the all other services should be available for service clients.
+The methods that belongs to the `debug` family are made only for developers (internal use) and the all other services should be available for service clients.
