@@ -15,7 +15,7 @@ def refresh_boards():
     filter = {"name": { "$in": available_boards }}
     open_boards = connect("MONGO_READONLY").entitydb.find(filter)
 
-    uuids = [str(result["_id"]) for result in open_boards]
+    uuids = [result["_id"] for result in open_boards]
 
     for uuid in uuids:
         filter = {"_id": ObjectId(uuid)}
@@ -29,6 +29,7 @@ def refresh_boards():
 
         for ranking in cf_board.ranks:
             operations += [UpdateOne({"uuid": ranking.uuid},
-                                     {"$set": ranking}, upsert=True)]
+                                     {"$set": ranking._asdict()},
+                           upsert=True)]
 
         connect().rankingdb.bulk_write(operations)
