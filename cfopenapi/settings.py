@@ -2,18 +2,9 @@ from decouple import config
 
 
 cfg = {
-    # Configuration file of api project. This file is loaded as a dict object
-    # and will update the config of flask app
-    'DEBUG': config('DEBUG', cast=bool),
-    'TESTING': config('TESTING', cast=bool),
-
-    ## Test Data
-    'DATA_FOLDER': config('DATA_FOLDER'),
-
     # Celery
     'CELERY_BROKER_URL':  config('CELERY_BROKER_URL'),
     'CELERY_RESULT_BACKEND':  config('CELERY_RESULT_BACKEND'),
-    'CELERY_TIMEZONE':  config('CELERY_TIMEZONE'),
 
     ## MongoDB
     'MONGO_DBNAME': config('MONGO_DBNAME'),
