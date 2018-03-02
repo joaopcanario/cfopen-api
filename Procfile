@@ -1,2 +1,2 @@
-web: gunicorn wsgi:app
-worker: celery worker -A wsgi.celery --beat --loglevel=info
+web: gunicorn cfopenapi.wsgi:app
+worker: celery worker -A cfopenapi.wsgi.celery --beat --loglevel=info

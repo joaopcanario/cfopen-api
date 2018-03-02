@@ -1,6 +1,5 @@
 # Load celery
-from leaderboard.extensions import celery
-from leaderboard import create_app
+from . import celery, create_app
 
 from flasgger import Swagger
 

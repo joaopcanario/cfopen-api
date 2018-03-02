@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 
-import leaderboard
+import cfopenapi
 
 
 debug_bp = Blueprint("debug_bp", __name__)
@@ -44,4 +44,4 @@ def version():
       200:
         description: Ok
     '''
-    return jsonify(f"API version: {leaderboard.version}"), 200
+    return jsonify(f"API version: {cfopenapi.version}"), 200

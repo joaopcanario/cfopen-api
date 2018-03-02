@@ -1,14 +1,16 @@
 from flask import Flask
 
-from leaderboard.blueprints import debug, cfopen, core
-from leaderboard.extensions import celery
-from leaderboard import celeryconfig
+from .blueprints import debug, cfopen, core
+from .extensions import celery, celeryconfig
 
-import leaderboard
-import settings
+from . import settings
+from . import tasks
 
 
-def init_celery(app):
+version = '1.0.0'
+
+
+def _init_celery(app):
     celery.conf.update(app.config)
     celery.config_from_object(celeryconfig)
 
@@ -21,6 +23,26 @@ def init_celery(app):
                 return TaskBase.__call__(self, *args, **kwargs)
 
     celery.Task = ContextTask
+
+
+def _config_swagger(app):
+    '''Swagger configuration'''
+
+    specs_description = open('docs/specs_description.yml', 'r')
+
+    app.config['SWAGGER'] = {
+        "version": "2.0",
+        "title": "Reebok CrossFit Games - Open Custom Leaderboard",
+        "specs": [{
+            "version": version,
+            "title": f"API Spec v{version}",
+            "endpoint": 'spec',
+            "route": '/spec',
+            "description": specs_description.read()
+        }]
+    }
+
+    return app
 
 
 def create_app(in_celery=False, in_swagger=False):
@@ -36,29 +58,9 @@ def create_app(in_celery=False, in_swagger=False):
     app.register_blueprint(cfopen, url_prefix='/api/v1/open')
 
     if in_swagger:
-        init_celery(app)
+        _init_celery(app)
 
     if in_swagger:
-        app = config_swagger(app)
-
-    return app
-
-
-def config_swagger(app):
-    '''Swagger configuration'''
-
-    specs_description = open('docs/specs_description.yml', 'r')
-
-    app.config['SWAGGER'] = {
-        "version": "2.0",
-        "title": "Reebok CrossFit Games - Open Custom Leaderboard",
-        "specs": [{
-            "version": leaderboard.version,
-            "title": f"API Spec v{leaderboard.version}",
-            "endpoint": 'spec',
-            "route": '/spec',
-            "description": specs_description.read()
-        }]
-    }
+        app = _config_swagger(app)
 
     return app

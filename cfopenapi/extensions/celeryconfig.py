@@ -1,6 +1,6 @@
 from celery.schedules import crontab
 
-CELERY_IMPORTS = ('leaderboard.tasks')
+CELERY_IMPORTS = ('cfopenapi.tasks')
 CELERY_TASK_RESULT_EXPIRES = 30
 CELERY_TIMEZONE = 'UTC'
 
@@ -11,7 +11,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 CELERYBEAT_SCHEDULE = {
     'refresh_leaderboards': {
-        'task': 'leaderboard.tasks.refresh_boards',
+        'task': 'cfopenapi.tasks.refresh_boards',
         'schedule': crontab(minute='0', hour='*/4'),
     }
 }

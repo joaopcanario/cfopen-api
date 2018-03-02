@@ -1,15 +1,15 @@
-from leaderboard.database import connect
-from leaderboard.championship import CFGamesBoard
-
-from pymongo import UpdateOne
-from decouple import config, Csv
-from bson.objectid import ObjectId
-
 import celery
 
 
 @celery.task()
 def refresh_boards():
+    from ..database import connect
+    from ..championship import CFGamesBoard
+
+    from pymongo import UpdateOne
+    from decouple import config, Csv
+    from bson.objectid import ObjectId
+
     available_boards = config('OPEN_BOARDS', default=[], cast=Csv())
 
     filter = {"name": { "$in": available_boards }}

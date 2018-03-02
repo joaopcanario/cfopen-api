@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
-
-from leaderboard.database import connect
 from bson.json_util import dumps
+
+from ..database import connect
 
 import collections
 
@@ -97,8 +97,6 @@ def leaderboards():
                        f'division={division}'), 200
 
     result = mongo.entitydb.find_one({"name": name})
-
-    print(f"{result['_id']}_{division}")
 
     filter_search = {"uuid": f"{result['_id']}_{division}"}
     result = mongo.rankingdb.find(filter_search)
