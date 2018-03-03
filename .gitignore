@@ -1,11 +1,11 @@
 .DS_Store
 .env
 .python-version
+.pytest_cache
+.db_cache
 
 *.db
 *.sqlite3
 *.pyc
 
 __pycache__
-data/
-scripttools/

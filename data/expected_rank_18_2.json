@@ -1,0 +1,399 @@
+{
+  "uuid": "1234_Men (18-34)",
+  "name": "Men (18-34)",
+  "last_update": "March 03 2018 - 03:07:26",
+  "athletes": [
+    {
+      "competitorId": "1",
+      "competitorName": "Random 01",
+      "affiliateName": "Random Box",
+      "divisionId": "1",
+      "division": "Men (18-34)",
+      "profilePicS3key": "pukie.png",
+      "overallScore": 4,
+      "scores": [
+        {
+          "ordinal": 0,
+          "scoreDisplay": "476 reps",
+          "score": "14760000",
+          "time": 0,
+          "scaled": false,
+          "rank": 2,
+          "dumb": false
+        },
+        {
+          "ordinal": 1,
+          "scoreDisplay": "4:17",
+          "score": "11100463",
+          "time": 257,
+          "scaled": false,
+          "rank": 1,
+          "dumb": false
+        },
+        {
+          "ordinal": 2,
+          "scoreDisplay": "325 lb",
+          "score": "13250463",
+          "time": 0,
+          "scaled": false,
+          "rank": 1,
+          "dumb": false
+        },
+        {
+          "ordinal": 3,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        },
+        {
+          "ordinal": 4,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        }
+      ]
+    },
+    {
+      "competitorId": "2",
+      "competitorName": "Random 02",
+      "affiliateName": "Random Box",
+      "divisionId": "1",
+      "division": "Men (18-34)",
+      "profilePicS3key": "pukie.png",
+      "overallScore": 6,
+      "scores": [
+        {
+          "ordinal": 0,
+          "scoreDisplay": "476 reps",
+          "score": "14760000",
+          "time": 0,
+          "scaled": false,
+          "rank": 2,
+          "dumb": false
+        },
+        {
+          "ordinal": 1,
+          "scoreDisplay": "10:34",
+          "score": "11100086",
+          "time": 634,
+          "scaled": false,
+          "rank": 2,
+          "dumb": false
+        },
+        {
+          "ordinal": 2,
+          "scoreDisplay": "135 lb",
+          "score": "11350086",
+          "time": 0,
+          "scaled": false,
+          "rank": 2,
+          "dumb": false
+        },
+        {
+          "ordinal": 3,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        },
+        {
+          "ordinal": 4,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        }
+      ]
+    },
+    {
+      "competitorId": "6",
+      "competitorName": "Random 06",
+      "affiliateName": "Random Box",
+      "divisionId": "1",
+      "division": "Men (18-34)",
+      "profilePicS3key": "pukie.png",
+      "overallScore": 11,
+      "scores": [
+        {
+          "ordinal": 0,
+          "scoreDisplay": "62 reps",
+          "score": "10620000",
+          "time": 0,
+          "scaled": false,
+          "rank": 5,
+          "dumb": false
+        },
+        {
+          "ordinal": 1,
+          "scoreDisplay": "88 reps",
+          "score": "10880000",
+          "time": 720,
+          "scaled": false,
+          "rank": 3,
+          "dumb": false
+        },
+        {
+          "ordinal": 2,
+          "scoreDisplay": "0",
+          "score": "10000000",
+          "time": 0,
+          "scaled": false,
+          "rank": 3,
+          "dumb": false
+        },
+        {
+          "ordinal": 3,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        },
+        {
+          "ordinal": 4,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        }
+      ]
+    },
+    {
+      "competitorId": "3",
+      "competitorName": "Random 03",
+      "affiliateName": "Random Box",
+      "divisionId": "1",
+      "division": "Men (18-34)",
+      "profilePicS3key": "pukie.png",
+      "overallScore": 12,
+      "scores": [
+        {
+          "ordinal": 0,
+          "scoreDisplay": "298 reps",
+          "score": "12980000",
+          "time": 0,
+          "scaled": false,
+          "rank": 4,
+          "dumb": false
+        },
+        {
+          "ordinal": 1,
+          "scoreDisplay": "7:02 - s",
+          "score": "1100298",
+          "time": 422,
+          "scaled": true,
+          "rank": 4,
+          "dumb": false
+        },
+        {
+          "ordinal": 2,
+          "scoreDisplay": "221 lb - s",
+          "score": "2210298",
+          "time": 0,
+          "scaled": true,
+          "rank": 4,
+          "dumb": false
+        },
+        {
+          "ordinal": 3,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        },
+        {
+          "ordinal": 4,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        }
+      ]
+    },
+    {
+      "competitorId": "5",
+      "competitorName": "Random 05",
+      "affiliateName": "Random Box",
+      "divisionId": "1",
+      "division": "Men (18-34)",
+      "profilePicS3key": "pukie.png",
+      "overallScore": 13,
+      "scores": [
+        {
+          "ordinal": 0,
+          "scoreDisplay": "480 reps",
+          "score": "14800000",
+          "time": 0,
+          "scaled": false,
+          "rank": 1,
+          "dumb": false
+        },
+        {
+          "ordinal": 1,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 6,
+          "dumb": false
+        },
+        {
+          "ordinal": 2,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 6,
+          "dumb": false
+        },
+        {
+          "ordinal": 3,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        },
+        {
+          "ordinal": 4,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        }
+      ]
+    },
+    {
+      "competitorId": "4",
+      "competitorName": "Random 04",
+      "affiliateName": "Random Box",
+      "divisionId": "1",
+      "division": "Men (18-34)",
+      "profilePicS3key": "pukie.png",
+      "overallScore": 16,
+      "scores": [
+        {
+          "ordinal": 0,
+          "scoreDisplay": "242 reps - s",
+          "score": "2420000",
+          "time": 0,
+          "scaled": true,
+          "rank": 6,
+          "dumb": false
+        },
+        {
+          "ordinal": 1,
+          "scoreDisplay": "8:50 - s",
+          "score": "1100190",
+          "time": 530,
+          "scaled": true,
+          "rank": 5,
+          "dumb": false
+        },
+        {
+          "ordinal": 2,
+          "scoreDisplay": "180 lb - s",
+          "score": "1800190",
+          "time": 0,
+          "scaled": true,
+          "rank": 5,
+          "dumb": false
+        },
+        {
+          "ordinal": 3,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        },
+        {
+          "ordinal": 4,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        }
+      ]
+    },
+    {
+      "competitorId": "7",
+      "competitorName": "Random 07",
+      "affiliateName": "Random Box",
+      "divisionId": "1",
+      "division": "Men (18-34)",
+      "profilePicS3key": "pukie.png",
+      "overallScore": 19,
+      "scores": [
+        {
+          "ordinal": 0,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 7,
+          "dumb": false
+        },
+        {
+          "ordinal": 1,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 6,
+          "dumb": false
+        },
+        {
+          "ordinal": 2,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 6,
+          "dumb": false
+        },
+        {
+          "ordinal": 3,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        },
+        {
+          "ordinal": 4,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        }
+      ]
+    }
+  ]
+}

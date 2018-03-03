@@ -114,7 +114,7 @@ def leaderboards():
                 'affiliateName': athlete['affiliateName'],
                 'competitorName': athlete['competitorName'],
                 'overallScore': athlete['overallScore'],
-                'profilePic': athlete['profilePic'],
+                'profilePicS3key': athlete['profilePicS3key'],
                 'scores': scores
             })
 

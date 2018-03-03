@@ -12,6 +12,6 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERYBEAT_SCHEDULE = {
     'refresh_leaderboards': {
         'task': 'cfopenapi.tasks.refresh_boards',
-        'schedule': crontab(minute='0', hour='*/4'),
+        'schedule': crontab(minute='*/30'),
     }
 }

@@ -1,0 +1,56 @@
+{
+  "competitorId": "1",
+  "competitorName": "Random 01",
+  "affiliateName": "Random Box",
+  "divisionId": "1",
+  "division": "Men (18-34)",
+  "profilePicS3key": "pukie.png",
+  "overallScore": 0,
+  "scores": [
+    {
+      "ordinal": 0,
+      "scoreDisplay": "476 reps",
+      "score": "14760000",
+      "time": 0,
+      "scaled": false,
+      "rank": 0,
+      "dumb": false
+    },
+    {
+      "ordinal": 1,
+      "scoreDisplay": "4:17",
+      "score": "11100463",
+      "time": 257,
+      "scaled": false,
+      "rank": 0,
+      "dumb": false
+    },
+    {
+      "ordinal": 2,
+      "scoreDisplay": "325 lb",
+      "score": "13250463",
+      "time": 0,
+      "scaled": false,
+      "rank": 0,
+      "dumb": false
+    },
+    {
+      "ordinal": 3,
+      "scoreDisplay": "--",
+      "score": "0",
+      "time": 0,
+      "scaled": false,
+      "rank": 0,
+      "dumb": true
+    },
+    {
+      "ordinal": 4,
+      "scoreDisplay": "--",
+      "score": "0",
+      "time": 0,
+      "scaled": false,
+      "rank": 0,
+      "dumb": true
+    }
+  ]
+}

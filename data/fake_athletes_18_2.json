@@ -1,0 +1,254 @@
+[
+  {
+    "entrant":
+    {
+      "competitorId": "1",
+      "competitorName": "Random 01",
+      "profilePicS3key": "pukie.png",
+      "divisionId": "1",
+      "affiliateId": "1",
+      "affiliateName": "Random Box"
+    },
+    "scores":
+    [
+      {
+        "ordinal": 1,
+        "rank": "1",
+        "score": "14760000",
+        "scoreDisplay": "476 reps",
+        "scaled": "0"
+      },
+      {
+        "ordinal": 2,
+        "rank": "1",
+        "score": "11100463",
+        "scoreDisplay": "4:17",
+        "scaled": "0",
+        "time": 257
+      },
+      {
+        "ordinal": 3,
+        "rank": "1",
+        "score": "13250463",
+        "scoreDisplay": "325 lb",
+        "scaled": "0"
+      }
+    ]
+  },
+  {
+    "entrant":
+    {
+      "competitorId": "2",
+      "competitorName": "Random 02",
+      "profilePicS3key": "pukie.png",
+      "divisionId": "1",
+      "affiliateId": "1",
+      "affiliateName": "Random Box"
+    },
+    "scores":
+    [
+      {
+        "ordinal": 1,
+        "rank": "1",
+        "score": "14760000",
+        "scoreDisplay": "476 reps",
+        "scaled": "0"
+      },
+      {
+        "ordinal": 2,
+        "rank": "1",
+        "score": "11100086",
+        "scoreDisplay": "10:34",
+        "scaled": "0",
+        "time": 634
+      },
+      {
+        "ordinal": 3,
+        "rank": "1",
+        "score": "11350086",
+        "scoreDisplay": "135 lb",
+        "scaled": "0"
+      }
+    ]
+  },
+  {
+    "entrant":
+    {
+      "competitorId": "3",
+      "competitorName": "Random 03",
+      "profilePicS3key": "pukie.png",
+      "divisionId": "1",
+      "affiliateId": "1",
+      "affiliateName": "Random Box"
+    },
+    "scores":
+    [
+      {
+        "ordinal": 1,
+        "rank": "1",
+        "score": "12980000",
+        "scoreDisplay": "298 reps",
+        "scaled": "0"
+      },
+      {
+        "ordinal": 2,
+        "rank": "1",
+        "score": "1100298",
+        "scoreDisplay": "7:02 - s",
+        "scaled": "1",
+        "time": 422
+      },
+      {
+        "ordinal": 3,
+        "rank": "1",
+        "score": "2210298",
+        "scoreDisplay": "221 lb - s",
+        "scaled": "1"
+      }
+    ]
+  },
+  {
+    "entrant":
+    {
+      "competitorId": "4",
+      "competitorName": "Random 04",
+      "profilePicS3key": "pukie.png",
+      "divisionId": "1",
+      "affiliateId": "1",
+      "affiliateName": "Random Box"
+    },
+    "scores":
+    [
+      {
+        "ordinal": 1,
+        "rank": "1",
+        "score": "2420000",
+        "scoreDisplay": "242 reps - s",
+        "scaled": "1"
+      },
+      {
+        "ordinal": 2,
+        "rank": "1",
+        "score": "1100190",
+        "scoreDisplay": "8:50 - s",
+        "scaled": "1",
+        "time": 530
+      },
+      {
+        "ordinal": 3,
+        "rank": "1",
+        "score": "1800190",
+        "scoreDisplay": "180 lb - s",
+        "scaled": "1"
+      }
+    ]
+  },
+  {
+    "entrant":
+    {
+      "competitorId": "5",
+      "competitorName": "Random 05",
+      "profilePicS3key": "pukie.png",
+      "divisionId": "1",
+      "affiliateId": "1",
+      "affiliateName": "Random Box"
+    },
+    "scores":
+    [
+      {
+        "ordinal": 1,
+        "rank": "1",
+        "score": "14800000",
+        "scoreDisplay": "480 reps",
+        "scaled": "0"
+      },
+      {
+        "ordinal": 2,
+        "rank": "1",
+        "score": "0",
+        "scoreDisplay": "",
+        "scaled": "0",
+        "time": ""
+      },
+      {
+        "ordinal": 3,
+        "rank": "1",
+        "score": "0",
+        "scoreDisplay": "",
+        "scaled": "0"
+      }
+    ]
+  },
+  {
+    "entrant":
+    {
+      "competitorId": "6",
+      "competitorName": "Random 06",
+      "profilePicS3key": "pukie.png",
+      "divisionId": "1",
+      "affiliateId": "1",
+      "affiliateName": "Random Box"
+    },
+    "scores":
+    [
+      {
+        "ordinal": 1,
+        "rank": "1",
+        "score": "10620000",
+        "scoreDisplay": "62 reps",
+        "scaled": "0"
+      },
+      {
+        "ordinal": 2,
+        "rank": "1",
+        "score": "10880000",
+        "scoreDisplay": "88 reps",
+        "scaled": "0",
+        "time": 720
+      },
+      {
+        "ordinal": 3,
+        "rank": "1",
+        "score": "10000000",
+        "scoreDisplay": "0",
+        "scaled": "0"
+      }
+    ]
+  },
+  {
+    "entrant":
+    {
+      "competitorId": "7",
+      "competitorName": "Random 07",
+      "profilePicS3key": "pukie.png",
+      "divisionId": "1",
+      "affiliateId": "1",
+      "affiliateName": "Random Box"
+    },
+    "scores":
+    [
+      {
+        "ordinal": 1,
+        "rank": "1",
+        "score": "0",
+        "scoreDisplay": "",
+        "scaled": "0"
+      },
+      {
+        "ordinal": 2,
+        "rank": "1",
+        "score": "0",
+        "scoreDisplay": "",
+        "scaled": "0",
+        "time": ""
+      },
+      {
+        "ordinal": 3,
+        "rank": "1",
+        "score": "0",
+        "scoreDisplay": "",
+        "scaled": "0"
+      }
+    ]
+  }
+]

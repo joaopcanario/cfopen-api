@@ -1,4 +1,4 @@
-from decouple import config
+from decouple import config, Csv
 
 
 cfg = {
@@ -9,6 +9,8 @@ cfg = {
     ## MongoDB
     'MONGO_DBNAME': config('MONGO_DBNAME'),
     'MONGO_URI': config('MONGO_URI'),
+
+    'OPEN_BOARDS': config('OPEN_BOARDS', default=[], cast=Csv()),
 
     ## Security
     # This is the secret key that is used for session signing.

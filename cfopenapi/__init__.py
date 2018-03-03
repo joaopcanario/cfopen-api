@@ -61,6 +61,11 @@ def create_app(in_celery=False, in_swagger=False):
         _init_celery(app)
 
     if in_swagger:
+        from flasgger import Swagger
+
         app = _config_swagger(app)
+        Swagger(app)
+
+    app.app_context().push()
 
     return app
