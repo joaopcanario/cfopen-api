@@ -4,7 +4,7 @@ import celery
 
 
 @celery.task()
-def refresh_boards(send_data=True):
+def refresh_boards():
     from ..database import connect
     from ..championship.board import CFGamesBoard
 
@@ -39,7 +39,6 @@ def refresh_boards(send_data=True):
                                      {"$set": ranking._asdict()},
                            upsert=True)]
 
-        if send_data:
-            connect().rankingdb.bulk_write(operations)
+        connect().rankingdb.bulk_write(operations)
 
     return f'Success rankings uuids: {ranks_uuids}'

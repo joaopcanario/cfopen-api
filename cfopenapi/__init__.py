@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS, cross_origin
 
 from .blueprints import debug, cfopen, core
 from .extensions import celery, celeryconfig
@@ -65,6 +66,8 @@ def create_app(in_celery=False, in_swagger=False):
 
         app = _config_swagger(app)
         Swagger(app)
+
+    CORS(app)
 
     app.app_context().push()
 

@@ -53,6 +53,7 @@ def test_rank_board():
     assert generated_rank['athletes'][5] == expected_rank['athletes'][5]
     assert generated_rank['athletes'][6] == expected_rank['athletes'][6]
 
+
 def test_ranks_uuids():
     data = json.load(open('data/fake_athletes_18_2.json'))
 
@@ -81,6 +82,7 @@ def test_ranks_uuids():
         if division_id in ["Masculino", "Feminino"]:
             division = division_id
 
-        uuids.append(f"{uuid}_{division}")
+        rank_uuid = f"{uuid}_{division}"
+        uuids.append(rank_uuid)
 
     assert uuids == expected_uuids

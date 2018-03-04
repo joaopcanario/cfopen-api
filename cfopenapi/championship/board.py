@@ -199,10 +199,10 @@ class Board(Base):
             board = self._sort(board)
             self.boards[division] = board
 
-            rankg_uuid = f"{uuid}_{division}"
+            rank_uuid = f"{uuid}_{division}"
             last_update = datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')
 
-            ranking = Ranking(rankg_uuid, division, last_update, board)
+            ranking = Ranking(rank_uuid, division, last_update, board)
             self.ranks.append(ranking)
 
 
