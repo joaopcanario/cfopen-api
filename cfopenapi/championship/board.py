@@ -24,12 +24,6 @@ divisions = {'1': 'Men (18-34)', '2': 'Women (18-34)',
                          'Girls (14-15) Girls (16-17) Women (35-39)'}
 
 
-# 2017
-# max_reps = [225, 0, 216, 0, 440]
-
-# 2018
-max_reps = [0, 0, 0, 0, 0]
-
 Ranking = namedtuple('Ranking', 'uuid name last_update athletes')
 
 dumb_score = {"score": "0", "scoreDisplay": ""}
@@ -70,6 +64,8 @@ class Score(Base):
         self.scoreDisplay = pattern.sub("", self.scoreDisplay)
 
         if ':' in self.scoreDisplay:
+            max_reps = [0, 0, 0, 0, 0]
+
             ddisplay = enumerate(reversed(self.scoreDisplay.split(":")))
             seconds = sum(int(x) * 60 ** i for i, x in ddisplay)
 
@@ -81,7 +77,7 @@ class Score(Base):
 class Athlete(Base):
     def __init__(self, competitor_id, competitor_name, affiliate_name,
                  division, profile_pic, scores, overall_score=0,
-                 num_of_ordinals=5):
+                 num_of_ordinals=6):
         super().__init__()
 
         # _profilepicsbucket = "https://profilepicsbucket.crossfit.com"
@@ -124,7 +120,7 @@ class Athlete(Base):
 
 
 class Board(Base):
-    def __init__(self, athletes, num_of_ordinals=5):
+    def __init__(self, athletes, num_of_ordinals=6):
         super().__init__()
 
         self.athletes = athletes
@@ -207,7 +203,7 @@ class Board(Base):
 
 
 class CFGamesBoard(Board):
-    def __init__(self, entities, ordinals=5):
+    def __init__(self, entities, ordinals=6):
         divs = [i for i, _ in divisions.items()
                 if i not in ["Masculino", "Feminino"]]
 

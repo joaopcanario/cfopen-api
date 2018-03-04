@@ -106,8 +106,8 @@ def leaderboards():
     for r in result:
         for athlete in r['athletes']:
             scores = [{'rank': score['rank'],
-                        'scoreDisplay': score['scoreDisplay'],
-                        'score': score['score']
+                       'scoreDisplay': score['scoreDisplay'],
+                       'score': score['score']
                       } for score in athlete['scores']]
 
             response.append({

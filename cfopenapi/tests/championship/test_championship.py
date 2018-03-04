@@ -9,7 +9,7 @@ def test_load_athlete():
     data = json.load(open('data/fake_athletes_18_2.json'))
     expected_athlete = json.load(open('data/expected_athlete.json'))
 
-    athletes = Athlete.from_list(data, 5)
+    athletes = Athlete.from_list(data, 6)
 
     assert len(athletes) == 7
     assert athletes[0] == expected_athlete
@@ -17,7 +17,7 @@ def test_load_athlete():
 
 def test_create_entity_board():
     entities = json.load(open('data/fake_entity.json'))
-    ordinals = 5
+    ordinals = 6
 
     cfboard = CFGamesBoard(entities, ordinals)
 
@@ -31,7 +31,7 @@ def test_rank_board():
     data = json.load(open('data/fake_athletes_18_2.json'))
     expected_rank = json.load(open('data/expected_rank_18_2.json'))
 
-    ordinals = 5
+    ordinals = 6
     uuid = '1234'
 
     board = Board(Athlete.from_list(data, ordinals), ordinals)
@@ -57,7 +57,7 @@ def test_rank_board():
 def test_ranks_uuids():
     data = json.load(open('data/fake_athletes_18_2.json'))
 
-    ordinals = 5
+    ordinals = 6
     uuid = '1234'
 
     athletes = Athlete.from_list(data, ordinals)

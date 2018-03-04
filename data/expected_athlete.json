@@ -51,6 +51,15 @@
       "scaled": false,
       "rank": 0,
       "dumb": true
+    },
+    {
+      "ordinal": 5,
+      "scoreDisplay": "--",
+      "score": "0",
+      "time": 0,
+      "scaled": false,
+      "rank": 0,
+      "dumb": true
     }
   ]
 }
