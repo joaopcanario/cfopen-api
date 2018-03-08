@@ -113,6 +113,7 @@ def leaderboards():
             response.append({
                 'affiliateName': athlete['affiliateName'],
                 'competitorName': athlete['competitorName'],
+                'overallRank': athlete['overallRank'],
                 'overallScore': athlete['overallScore'],
                 'profilePicS3key': athlete['profilePicS3key'],
                 'scores': scores

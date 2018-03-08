@@ -10,6 +10,7 @@
       "divisionId": "1",
       "division": "Men (18-34)",
       "profilePicS3key": "pukie.png",
+      "overallRank": 1,
       "overallScore": 4,
       "scores": [
         {
@@ -75,6 +76,7 @@
       "divisionId": "1",
       "division": "Men (18-34)",
       "profilePicS3key": "pukie.png",
+      "overallRank": 2,
       "overallScore": 6,
       "scores": [
         {
@@ -140,6 +142,7 @@
       "divisionId": "1",
       "division": "Men (18-34)",
       "profilePicS3key": "pukie.png",
+      "overallRank": 3,
       "overallScore": 11,
       "scores": [
         {
@@ -205,6 +208,7 @@
       "divisionId": "1",
       "division": "Men (18-34)",
       "profilePicS3key": "pukie.png",
+      "overallRank": 4,
       "overallScore": 12,
       "scores": [
         {
@@ -270,6 +274,7 @@
       "divisionId": "1",
       "division": "Men (18-34)",
       "profilePicS3key": "pukie.png",
+      "overallRank": 5,
       "overallScore": 13,
       "scores": [
         {
@@ -335,6 +340,7 @@
       "divisionId": "1",
       "division": "Men (18-34)",
       "profilePicS3key": "pukie.png",
+      "overallRank": 6,
       "overallScore": 16,
       "scores": [
         {
@@ -400,6 +406,73 @@
       "divisionId": "1",
       "division": "Men (18-34)",
       "profilePicS3key": "pukie.png",
+      "overallRank": 7,
+      "overallScore": 19,
+      "scores": [
+        {
+          "ordinal": 0,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 7,
+          "dumb": false
+        },
+        {
+          "ordinal": 1,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 6,
+          "dumb": false
+        },
+        {
+          "ordinal": 2,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 6,
+          "dumb": false
+        },
+        {
+          "ordinal": 3,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        },
+        {
+          "ordinal": 4,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        },
+        {
+          "ordinal": 5,
+          "scoreDisplay": "--",
+          "score": "0",
+          "time": 0,
+          "scaled": false,
+          "rank": 0,
+          "dumb": true
+        }
+      ]
+    },
+    {
+      "competitorId": "8",
+      "competitorName": "Random 08",
+      "affiliateName": "Random Box",
+      "divisionId": "1",
+      "division": "Men (18-34)",
+      "profilePicS3key": "pukie.png",
+      "overallRank": 7,
       "overallScore": 19,
       "scores": [
         {

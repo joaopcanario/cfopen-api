@@ -76,7 +76,7 @@ class Score(Base):
 
 class Athlete(Base):
     def __init__(self, competitor_id, competitor_name, affiliate_name,
-                 division, profile_pic, scores, overall_score=0,
+                 division, profile_pic, scores,
                  num_of_ordinals=6):
         super().__init__()
 
@@ -89,7 +89,8 @@ class Athlete(Base):
         self.divisionId = division
         self.division = divisions.get(self.divisionId)
         self.profilePicS3key = profile_pic
-        self.overallScore = overall_score
+        self.overallRank = 0
+        self.overallScore = 0
 
         self.scores = [Score(ord, score, score.get("dumb", False)).asdict()
                        for ord, score in enumerate(scores)]
@@ -153,32 +154,17 @@ class Board(Base):
                              if athl["scores"][w]['scoreDisplay'] == '--' and
                                 not athl["scores"][w]['dumb']]
 
-            self._update_athletes_rank(rx + scale + not_performed, w)
+            Board.update_rank_by_wod(rx + scale + not_performed, w)
 
         # OVERALL SCORE
         for athlete in board:
             athlete["overallScore"] = sum([athlete['scores'][w]["rank"]
                                            for w in range(0, self.ordinals)])
 
-        return sorted(board, key=lambda x: x['overallScore'])
+        board = sorted(board, key=lambda x: x['overallScore'])
+        Board.update_rank_by_overall_score(board)
 
-    def _update_athletes_rank(self, all_athletes, score):
-        prev_rank = 1
-        prev_score = (0, 0)
-
-        for position, athlete in enumerate(all_athletes):
-            atl_wod = athlete["scores"][score]
-            rank = position + 1
-
-            actual_score = (atl_wod["score"], atl_wod["time"])
-
-            if actual_score == prev_score:
-                rank = prev_rank
-            else:
-                prev_rank = rank
-
-            prev_score = (atl_wod["score"], atl_wod["time"])
-            atl_wod["rank"] = rank
+        return board
 
     def generate_ranks(self, uuid):
         from datetime import datetime
@@ -200,6 +186,43 @@ class Board(Base):
 
             ranking = Ranking(rank_uuid, division, last_update, board)
             self.ranks.append(ranking)
+
+    @classmethod
+    def update_rank_by_wod(cls, all_athletes, score):
+        prev_rank = 1
+        prev_score = (0, 0)
+
+        for position, athlete in enumerate(all_athletes):
+            atl_wod = athlete["scores"][score]
+            rank = position + 1
+
+            actual_score = (atl_wod["score"], atl_wod["time"])
+
+            if actual_score == prev_score:
+                rank = prev_rank
+            else:
+                prev_rank = rank
+
+            prev_score = actual_score
+            atl_wod["rank"] = rank
+
+    @classmethod
+    def update_rank_by_overall_score(cls, all_athletes):
+        prev_rank = 1
+        prev_score = 0
+
+        for position, athlete in enumerate(all_athletes):
+            rank = position + 1
+
+            actual_score = athlete["overallScore"]
+
+            if actual_score == prev_score:
+                rank = prev_rank
+            else:
+                prev_rank = rank
+
+            prev_score = actual_score
+            athlete["overallRank"] = rank
 
 
 class CFGamesBoard(Board):

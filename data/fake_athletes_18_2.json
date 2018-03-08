@@ -250,5 +250,41 @@
         "scaled": "0"
       }
     ]
+  },
+  {
+    "entrant":
+    {
+      "competitorId": "8",
+      "competitorName": "Random 08",
+      "profilePicS3key": "pukie.png",
+      "divisionId": "1",
+      "affiliateId": "1",
+      "affiliateName": "Random Box"
+    },
+    "scores":
+    [
+      {
+        "ordinal": 1,
+        "rank": "1",
+        "score": "0",
+        "scoreDisplay": "",
+        "scaled": "0"
+      },
+      {
+        "ordinal": 2,
+        "rank": "1",
+        "score": "0",
+        "scoreDisplay": "",
+        "scaled": "0",
+        "time": ""
+      },
+      {
+        "ordinal": 3,
+        "rank": "1",
+        "score": "0",
+        "scoreDisplay": "",
+        "scaled": "0"
+      }
+    ]
   }
 ]

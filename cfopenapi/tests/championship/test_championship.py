@@ -11,7 +11,6 @@ def test_load_athlete():
 
     athletes = Athlete.from_list(data, 6)
 
-    assert len(athletes) == 7
     assert athletes[0] == expected_athlete
 
 
