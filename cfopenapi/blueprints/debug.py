@@ -52,7 +52,7 @@ def version():
 @debug_bp.route('/refreshed')
 def refreshed():
     '''
-    Microservice Version
+    Database last update
     Shows Ranking Database last update.
 
     __Response Model__
