@@ -1,5 +1,7 @@
 from flask import Blueprint, jsonify
 
+from ..database import connect
+
 import cfopenapi
 
 
@@ -14,7 +16,7 @@ def ping():
 
     __Response Model__
 
-    <span style="margin-left:2em">__response__: Connectivity message</span>
+    <span style="margin-left:2em">Connectivity message</span>
 
     ---
     tags:
@@ -35,7 +37,7 @@ def version():
 
     __Response Model__
 
-    <span style="margin-left:2em">__response__: Microservice version</span>
+    <span style="margin-left:2em">Microservice version</span>
 
     ---
     tags:
@@ -45,3 +47,27 @@ def version():
         description: Ok
     '''
     return jsonify(f"API version: {cfopenapi.version}"), 200
+
+
+@debug_bp.route('/refreshed')
+def refreshed():
+    '''
+    Microservice Version
+    Shows Ranking Database last update.
+
+    __Response Model__
+
+    <span style="margin-left:2em">Last update</span>
+
+    ---
+    tags:
+      - Debug
+    responses:
+      200:
+        description: Ok
+    '''
+    mongo = connect("MONGO_READONLY")
+    result = mongo.rankingdb.find_one({"uuid": 'db_last_update'})
+
+    last_update = str(result['updated_on'])
+    return jsonify(f"Ranking DB last update was: {last_update}"), 200

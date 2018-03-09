@@ -11,6 +11,7 @@ def refresh_boards():
     from pymongo import UpdateOne
     from decouple import config, Csv
     from bson.objectid import ObjectId
+    from datetime import datetime
 
     with app.app_context():
         available_boards = app.config.get('OPEN_BOARDS')
@@ -40,5 +41,11 @@ def refresh_boards():
                            upsert=True)]
 
         connect().rankingdb.bulk_write(operations)
+
+    if uuids:
+        last_update = datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')
+
+        data = {'uuid': 'db_last_update', 'updated_on': last_update}
+        connect().rankingdb.insert_one(data)
 
     return f'Success rankings uuids: {ranks_uuids}'
