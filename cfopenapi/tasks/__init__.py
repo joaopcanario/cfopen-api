@@ -16,17 +16,17 @@ def refresh_boards():
     with app.app_context():
         available_boards = app.config.get('OPEN_BOARDS')
 
-    filter = {"name": { "$in": available_boards }}
-    open_boards = connect("MONGO_READONLY").entitydb.find(filter)
+    entity_db = connect("MONGO_READONLY").entitydb
+    ranking_db = connect().rankingdb
+
+    open_boards = entity_db.find({"name": { "$in": available_boards }})
 
     uuids = [result["_id"] for result in open_boards]
 
     ranks_uuids = []
 
     for uuid in uuids:
-        filter = {"_id": ObjectId(uuid)}
-
-        result = connect("MONGO_READONLY").entitydb.find_one(filter)
+        result = entity_db.find_one({"_id": ObjectId(uuid)})
 
         cf_board = CFGamesBoard(result['entities'])
         cf_board.generate_ranks(uuid)
@@ -40,13 +40,13 @@ def refresh_boards():
                                      {"$set": ranking._asdict()},
                                      upsert=True)]
 
-        connect().rankingdb.bulk_write(operations)
+        ranking_db.bulk_write(operations)
 
     if uuids:
         last_update = datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')
 
-        connect().rankingdb.update_one({'uuid': 'db_last_update'},
-                                       {"$set": {'updated_on': last_update}},
-                                       upsert=True)
+        ranking_db.update_one({'uuid': 'db_last_update'},
+                              {"$set": {'updated_on': last_update}},
+                              upsert=True)
 
     return f'Success rankings uuids: {ranks_uuids}'

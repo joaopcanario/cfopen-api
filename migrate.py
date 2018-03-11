@@ -8,36 +8,28 @@ import json
 import ast
 
 
-states = ['Acre', 'Alagoas', 'Amapá', 'Amazonas', 'Bahia', 'Ceará',
-          'Distrito Federal', 'Espírito Santo', 'Goiás', 'Maranhão',
-          'Mato Grosso', 'Mato Grosso do Sul', 'Minas Gerais', 'Pará',
-          'Paraíba', 'Paraná', 'Pernambuco', 'Piauí', 'Rio de Janeiro',
-          'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 'Roraima',
-          'Santa Catarina', 'São Paulo', 'Sergipe', 'Tocantins']
-
-
 regions = {'Norte': ['Amazonas', 'Roraima', 'Amapá', 'Pará', 'Tocantins',
                      'Rondônia', 'Acre'],
            'Nordeste': ['Maranhão', 'Piauí', 'Ceará', 'Rio Grande do Norte',
                         'Pernambuco', 'Paraíba', 'Sergipe', 'Alagoas',
                         'Bahia'],
-           'Centro Oeste': ['Mato Grosso', 'Mato Grosso do Sul', 'Goias',
+           'Centro-Oeste': ['Mato Grosso', 'Mato Grosso do Sul', 'Goias',
                             'Distrito Federal'],
            'Sudeste': ['São Paulo', 'Rio de Janeiro', 'Espírito Santo',
                        'Minas Gerais'],
            'Sul': ['Paraná', 'Rio Grande do Sul', 'Santa Catarina']}
 
 
-br_initials = {'AC': 'Acre', 'AL': 'Alagoas', 'AP': 'Amapá', 'AM': 'Amazonas',
-               'BA': 'Bahia', 'CE': 'Ceará', 'DF': 'Distrito Federal',
-               'ES': 'Espírito Santo', 'GO': 'Goiás', 'MA': 'Maranhão',
-               'MT': 'Mato Grosso', 'MS': 'Mato Grosso do Sul',
-               'MG': 'Minas Gerais', 'PA': 'Pará', 'PB': 'Paraíba',
-               'PR': 'Paraná', 'PE': 'Pernambuco', 'PI': 'Piauí',
-               'RJ': 'Rio de Janeiro', 'RN': 'Rio Grande do Norte',
-               'RS': 'Rio Grande do Sul', 'RO': 'Rondônia', 'RR': 'Roraima',
-               'SC': 'Santa Catarina', 'SP': 'São Paulo', 'SE': 'Sergipe',
-               'TO': 'Tocantins'}
+abbrv = {'AC': 'Acre', 'AL': 'Alagoas', 'AP': 'Amapá', 'AM': 'Amazonas',
+         'BA': 'Bahia', 'CE': 'Ceará', 'DF': 'Distrito Federal',
+         'ES': 'Espírito Santo', 'GO': 'Goiás', 'MA': 'Maranhão',
+         'MT': 'Mato Grosso', 'MS': 'Mato Grosso do Sul',
+         'MG': 'Minas Gerais', 'PA': 'Pará', 'PB': 'Paraíba',
+         'PR': 'Paraná', 'PE': 'Pernambuco', 'PI': 'Piauí',
+         'RJ': 'Rio de Janeiro', 'RN': 'Rio Grande do Norte',
+         'RS': 'Rio Grande do Sul', 'RO': 'Rondônia', 'RR': 'Roraima',
+         'SC': 'Santa Catarina', 'SP': 'São Paulo', 'SE': 'Sergipe',
+         'TO': 'Tocantins'}
 
 
 def connect(uri="MONGO_URI"):
@@ -47,56 +39,27 @@ def connect(uri="MONGO_URI"):
     return mongo
 
 
-def retrieve_location(lat, lng):
-    from geopy.geocoders import Nominatim
-
-    Location = namedtuple('Location', 'country city state coordinates')
-
-    try:
-        location = Nominatim().reverse(f'{lat}, {lng}', timeout=2)
-        address = location.raw['address']
-
-        country = address.get("country", '')
-        state = address.get("state", '')
-        city = address.get("city", '')
-
-        if country in ['Brazil', 'Brasil']:
-            state = br_initials.get(state)
-
-            if city == 'SSA':
-                city = 'Salvador'
-            elif city == 'SP':
-                city = 'São Paulo'
-
-        coordinates = {"latitude": lat, "longitude": lng}
-
-        return Location(country, city, state, coordinates)
-    except Exception as e:
-        return Location('None', 'None', 'None', 'None')
-
-
 @click.group()
 def main():
    pass
 
 
-@main.command()
-def refresh_boards():
+@main.command('upboards', help='Update Ranking DB with last athletes results.')
+def upboards():
     from cfopenapi.championship.board import CFGamesBoard
     from bson.objectid import ObjectId
     from datetime import datetime
 
-    available_boards = config('OPEN_BOARDS', default=[], cast=Csv())
+    entity_db = connect("MONGO_READONLY").entitydb
+    ranking_db = connect().rankingdb
 
-    filter = {"name": { "$in": available_boards }}
-    open_boards = connect("MONGO_READONLY").entitydb.find(filter)
+    available_boards = config('OPEN_BOARDS', default=[], cast=Csv())
+    open_boards = entity_db.find({"name": { "$in": available_boards }})
 
     uuids = [result["_id"] for result in open_boards]
 
     for uuid in uuids:
-        filter = {"_id": ObjectId(uuid)}
-
-        result = connect("MONGO_READONLY").entitydb.find_one(filter)
+        result = entity_db.find_one({"_id": ObjectId(uuid)})
 
         cf_board = CFGamesBoard(result['entities'])
         cf_board.generate_ranks(uuid)
@@ -108,34 +71,63 @@ def refresh_boards():
                                      {"$set": ranking._asdict()},
                                      upsert=True)]
 
-        connect().rankingdb.bulk_write(operations)
+        ranking_db.bulk_write(operations)
 
     if uuids:
         last_update = datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')
 
-        connect().rankingdb.update_one({'uuid': 'db_last_update'},
-                                       {"$set": {'updated_on': last_update}},
-                                       upsert=True)
+        ranking_db.update_one({'uuid': 'db_last_update'},
+                              {"$set": {'updated_on': last_update}},
+                              upsert=True)
 
 
-@main.command()
-def fetch_affiliates():
+@main.command('affiliates', help='Retrieves the affiliates data of '
+                                 'assigned countries on .env file and '
+                                 'generate the Affiliate DB.')
+def affiliates():
+    from geopy.geocoders import Nominatim
+
+    Location = namedtuple('Location', 'country city state coordinates')
+
     content = requests.get('https://maps.crossfit.com/getAllAffiliates.php')
     crossfit_affiliates = ast.literal_eval(content.text)
 
     countries = config('CF_COUNTRIES', default=[], cast=Csv())
 
-    print(f'Countries: {countries}')
-    print(f'Number of affiliates: {len(crossfit_affiliates)}')
+    click.echo(f'Countries: {countries}')
+    click.echo(f'Number of affiliates: {len(crossfit_affiliates)}')
+
+    geocode = Nominatim()
 
     data = []
     for aff in crossfit_affiliates:
-        lat, lng = aff[:2]
-        location = retrieve_location(lat, lng)
+        lat_lng = ", ".join(map(str, aff[:2]))
 
-        print(f"{aff[2]} from {location.country}")
+        try:
+            address = geocode.reverse(lat_lng, timeout=2).raw['address']
+
+            country = address.get("country", '')
+            state = address.get("state", '')
+            city = address.get("city", '')
+
+            if country in ['Brazil', 'Brasil']:
+                state = abbrv.get(state)
+
+                if city == 'SSA':
+                    city = 'Salvador'
+                elif city == 'SP':
+                    city = 'São Paulo'
+
+            location = Location(country, city, state,
+                                {"latitude": aff[:2][0],
+                                 "longitude": aff[:2][1]})
+        except Exception as e:
+            location = Location('None', 'None', 'None', 'None')
+
+        click.echo(f"{aff[2]} from {location.country}")
+
         if location.country in countries:
-            print("Added!")
+            click.echo("Added!")
             data.append({"affiliate_id": aff[3],
                          "name": aff[2],
                          "country": location.country,
@@ -143,30 +135,32 @@ def fetch_affiliates():
                          "state": location.state,
                          "coordinates": location.coordinates})
 
-    print(f'Data size: {len(data)}')
+    click.echo(f'Data size: {len(data)}')
     connect().affiliatedb.insert_many(data, bypass_document_validation=True)
 
 
-@main.command()
-def generate_entities():
+@main.command('entities', help='Generate the Entities DB of Brazil separeted '
+                               'by states and regions.')
+def entities():
+    mongo = connect()
+
     def affiliates(entity, entity_name):
         Affiliate = namedtuple('Affiliate', 'affiliate_id name country '
                                             'region city state')
 
-        result = connect().affiliatedb.find({entity: entity_name})
-        response = [Affiliate(a["affiliate_id"], a["name"], a["country"],
-                              "Latin America", a["city"], a["state"])._asdict()
-                    for a in result]
-
-        return response
+        return [Affiliate(a["affiliate_id"], a["name"], a["country"],
+                          "Latin America", a["city"], a["state"])._asdict()
+                for a in mongo.affiliatedb.find({entity: entity_name})]
 
     def insert_data(db_name, db_entities):
         data = {'name': db_name, 'entities': db_entities}
 
-        uuid = str(connect().entitydb.insert_one(data).inserted_id)
-        print({'uuid': uuid, 'board_name': db_name})
+        uuid = str(mongo.entitydb.insert_one(data).inserted_id)
+        click.echo({'uuid': uuid, 'board_name': db_name})
 
     def states_leaderboards():
+        states = [states for _, states in abbrv.items()]
+
         for state in states:
             cf_entities = [{'id': af['affiliate_id'], 'name': af['name']}
                            for af in affiliates('state', state)]
@@ -180,10 +174,10 @@ def generate_entities():
                            for state in states]
             insert_data(region, cf_entities)
 
-    print('Creating leaderboard by state')
+    click.echo('Creating leaderboard by state')
     states_leaderboards()
 
-    print('Creating leaderboard by region')
+    click.echo('Creating leaderboard by region')
     regions_leaderboards()
 
 
