@@ -106,15 +106,16 @@ def refresh_boards():
         for ranking in cf_board.ranks:
             operations += [UpdateOne({"uuid": ranking.uuid},
                                      {"$set": ranking._asdict()},
-                           upsert=True)]
+                                     upsert=True)]
 
         connect().rankingdb.bulk_write(operations)
 
     if uuids:
         last_update = datetime.utcnow().strftime('%B %d %Y - %H:%M:%S')
 
-        data = {'uuid': 'db_last_update', 'updated_on': last_update}
-        connect().rankingdb.insert_one(data)
+        connect().rankingdb.update_one({'uuid': 'db_last_update'},
+                                       {"$set": {'updated_on': last_update}},
+                                       upsert=True)
 
 
 @main.command()
