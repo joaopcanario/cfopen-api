@@ -85,3 +85,12 @@ def test_ranks_uuids():
         uuids.append(rank_uuid)
 
     assert uuids == expected_uuids
+
+
+def test_from_list_to_leaderboard():
+    rank = json.load(open('data/expected_rank_18_2.json'))
+    expected_response = json.load(open('data/expected_leaderboard_18.2.json'))
+
+    response = Athlete.from_list_to_leaderboard(rank['athletes'])
+
+    assert expected_response == response

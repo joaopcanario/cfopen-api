@@ -26,8 +26,6 @@ divisions = {'1': 'Men (18-34)', '2': 'Women (18-34)',
 
 Ranking = namedtuple('Ranking', 'uuid name last_update athletes')
 
-dumb_score = {"score": "0", "scoreDisplay": ""}
-
 
 class Base(object):
 
@@ -96,7 +94,10 @@ class Athlete(Base):
                        for ord, score in enumerate(scores)]
 
         for i in range(len(self.scores), num_of_ordinals):
-            self.scores.append(Score(i, dumb_score, True).asdict())
+            score = Score(ordinal=i,
+                          score={"score": "0", "scoreDisplay": ""},
+                          dumb=True).asdict()
+            self.scores.append(score)
 
     @classmethod
     def from_list(cls, athletes, ordinal):
@@ -118,6 +119,27 @@ class Athlete(Base):
             athletes_page.append(athlete)
 
         return athletes_page
+
+    @classmethod
+    def from_list_to_leaderboard(cls, athletes):
+        response = []
+
+        for athlete in athletes:
+            scores = [{'rank': score['rank'],
+                       'scoreDisplay': score['scoreDisplay'],
+                       'score': score['score']
+                      } for score in athlete['scores'] if not score['dumb']]
+
+            response.append({
+                'affiliateName': athlete['affiliateName'],
+                'competitorName': athlete['competitorName'],
+                'overallRank': athlete['overallRank'],
+                'overallScore': athlete['overallScore'],
+                'profilePicS3key': athlete['profilePicS3key'],
+                'scores': scores
+            })
+
+        return response
 
 
 class Board(Base):

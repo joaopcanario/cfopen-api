@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from bson.json_util import dumps
 
 from ..database import connect
+from ..championship.board import Athlete
 
 import collections
 
@@ -99,24 +100,8 @@ def leaderboards():
     result = mongo.entitydb.find_one({"name": name})
 
     filter_search = {"uuid": f"{result['_id']}_{division}"}
-    result = mongo.rankingdb.find(filter_search)
+    result = mongo.rankingdb.find_one(filter_search)
 
-    response = []
-
-    for r in result:
-        for athlete in r['athletes']:
-            scores = [{'rank': score['rank'],
-                       'scoreDisplay': score['scoreDisplay'],
-                       'score': score['score']
-                      } for score in athlete['scores']]
-
-            response.append({
-                'affiliateName': athlete['affiliateName'],
-                'competitorName': athlete['competitorName'],
-                'overallRank': athlete['overallRank'],
-                'overallScore': athlete['overallScore'],
-                'profilePicS3key': athlete['profilePicS3key'],
-                'scores': scores
-            })
+    response = Athlete.from_list_to_leaderboard(result['athletes'])
 
     return jsonify(response), 200

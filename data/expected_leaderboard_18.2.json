@@ -1,0 +1,194 @@
+[
+  {
+    "affiliateName": "Random Box",
+    "competitorName": "Random 01",
+    "overallRank": 1,
+    "overallScore": 4,
+    "profilePicS3key": "pukie.png",
+    "scores": [
+      {
+        "rank": 2,
+        "scoreDisplay": "476 reps",
+        "score": "14760000"
+      },
+      {
+        "rank": 1,
+        "scoreDisplay": "4:17",
+        "score": "11100463"
+      },
+      {
+        "rank": 1,
+        "scoreDisplay": "325 lb",
+        "score": "13250463"
+      }
+    ]
+  },
+  {
+    "affiliateName": "Random Box",
+    "competitorName": "Random 02",
+    "overallRank": 2,
+    "overallScore": 6,
+    "profilePicS3key": "pukie.png",
+    "scores": [
+      {
+        "rank": 2,
+        "scoreDisplay": "476 reps",
+        "score": "14760000"
+      },
+      {
+        "rank": 2,
+        "scoreDisplay": "10:34",
+        "score": "11100086"
+      },
+      {
+        "rank": 2,
+        "scoreDisplay": "135 lb",
+        "score": "11350086"
+      }
+    ]
+  },
+  {
+    "affiliateName": "Random Box",
+    "competitorName": "Random 06",
+    "overallRank": 3,
+    "overallScore": 11,
+    "profilePicS3key": "pukie.png",
+    "scores": [
+      {
+        "rank": 5,
+        "scoreDisplay": "62 reps",
+        "score": "10620000"
+      },
+      {
+        "rank": 3,
+        "scoreDisplay": "88 reps",
+        "score": "10880000"
+      },
+      {
+        "rank": 3,
+        "scoreDisplay": "0",
+        "score": "10000000"
+      }
+    ]
+  },
+  {
+    "affiliateName": "Random Box",
+    "competitorName": "Random 03",
+    "overallRank": 4,
+    "overallScore": 12,
+    "profilePicS3key": "pukie.png",
+    "scores": [
+      {
+        "rank": 4,
+        "scoreDisplay": "298 reps",
+        "score": "12980000"
+      },
+      {
+        "rank": 4,
+        "scoreDisplay": "7:02 - s",
+        "score": "1100298"
+      },
+      {
+        "rank": 4,
+        "scoreDisplay": "221 lb - s",
+        "score": "2210298"
+      }
+    ]
+  },
+  {
+    "affiliateName": "Random Box",
+    "competitorName": "Random 05",
+    "overallRank": 5,
+    "overallScore": 13,
+    "profilePicS3key": "pukie.png",
+    "scores": [
+      {
+        "rank": 1,
+        "scoreDisplay": "480 reps",
+        "score": "14800000"
+      },
+      {
+        "rank": 6,
+        "scoreDisplay": "--",
+        "score": "0"
+      },
+      {
+        "rank": 6,
+        "scoreDisplay": "--",
+        "score": "0"
+      }
+    ]
+  },
+  {
+    "affiliateName": "Random Box",
+    "competitorName": "Random 04",
+    "overallRank": 6,
+    "overallScore": 16,
+    "profilePicS3key": "pukie.png",
+    "scores": [
+      {
+        "rank": 6,
+        "scoreDisplay": "242 reps - s",
+        "score": "2420000"
+      },
+      {
+        "rank": 5,
+        "scoreDisplay": "8:50 - s",
+        "score": "1100190"
+      },
+      {
+        "rank": 5,
+        "scoreDisplay": "180 lb - s",
+        "score": "1800190"
+      }
+    ]
+  },
+  {
+    "affiliateName": "Random Box",
+    "competitorName": "Random 07",
+    "overallRank": 7,
+    "overallScore": 19,
+    "profilePicS3key": "pukie.png",
+    "scores": [
+      {
+        "rank": 7,
+        "scoreDisplay": "--",
+        "score": "0"
+      },
+      {
+        "rank": 6,
+        "scoreDisplay": "--",
+        "score": "0"
+      },
+      {
+        "rank": 6,
+        "scoreDisplay": "--",
+        "score": "0"
+      }
+    ]
+  },
+  {
+    "affiliateName": "Random Box",
+    "competitorName": "Random 08",
+    "overallRank": 7,
+    "overallScore": 19,
+    "profilePicS3key": "pukie.png",
+    "scores": [
+      {
+        "rank": 7,
+        "scoreDisplay": "--",
+        "score": "0"
+      },
+      {
+        "rank": 6,
+        "scoreDisplay": "--",
+        "score": "0"
+      },
+      {
+        "rank": 6,
+        "scoreDisplay": "--",
+        "score": "0"
+      }
+    ]
+  }
+]
