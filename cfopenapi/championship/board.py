@@ -128,7 +128,7 @@ class Athlete(Base):
             scores = [{'rank': score['rank'],
                        'scoreDisplay': score['scoreDisplay'],
                        'score': score['score']
-                      } for score in athlete['scores'] if not score['dumb']]
+                      } for score in athlete['scores']]
 
             response.append({
                 'affiliateName': athlete['affiliateName'],
