@@ -80,8 +80,11 @@ class Athlete(Base):
 
         # _profilepicsbucket = "https://profilepicsbucket.crossfit.com"
 
+        names = competitor_name.split(' ')
+        names = names[:2] + names[-1:] if len(names) > 3 else names
+
         self.competitorId = competitor_id
-        self.competitorName = competitor_name
+        self.competitorName = " ".join(names)
         self.affiliateName = affiliate_name
 
         self.divisionId = division
