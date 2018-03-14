@@ -2,3 +2,4 @@
 pytest-flask
 click
 geopy
+pylint
