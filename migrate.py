@@ -163,19 +163,23 @@ def entities():
         for state in states:
             cf_entities = [{'id': af['affiliate_id'], 'name': af['name']}
                            for af in affiliates('state', state)]
+
+            click.echo(f'Added {len(cf_entities)} affiliates from {state}')
             insert_data(state, cf_entities)
 
     def regions_leaderboards():
         for region, states in regions.items():
             cf_entities = [{'id': af['affiliate_id'], 'name': af['name']}
-                           for af in affiliates('state', state)
-                           for state in states]
+                           for state in states
+                           for af in affiliates('state', state)]
+
+            click.echo(f'Added {len(cf_entities)} affiliates from {region}')
             insert_data(region, cf_entities)
 
-    click.echo('Creating leaderboard by state')
+    click.echo('\nAdding affiliates arranged by Brazilian states\n')
     states_leaderboards()
 
-    click.echo('Creating leaderboard by region')
+    click.echo('\n\nAdding affiliates arranged by Brazilian regions\n')
     regions_leaderboards()
 
 
