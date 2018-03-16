@@ -4,7 +4,6 @@ from decouple import config, Csv
 
 import requests
 import click
-import json
 import ast
 
 
@@ -41,7 +40,7 @@ def connect(uri="MONGO_URI"):
 
 @click.group()
 def main():
-   pass
+    pass
 
 
 @main.command('upboards', help='Update Ranking DB with last athletes results.')
@@ -54,7 +53,7 @@ def upboards():
     ranking_db = connect().rankingdb
 
     available_boards = config('OPEN_BOARDS', default=[], cast=Csv())
-    open_boards = entity_db.find({"name": { "$in": available_boards }})
+    open_boards = entity_db.find({"name": {"$in": available_boards}})
 
     uuids = [result["_id"] for result in open_boards]
 
@@ -165,7 +164,6 @@ def entities():
             cf_entities = [{'id': af['affiliate_id'], 'name': af['name']}
                            for af in affiliates('state', state)]
             insert_data(state, cf_entities)
-
 
     def regions_leaderboards():
         for region, states in regions.items():
