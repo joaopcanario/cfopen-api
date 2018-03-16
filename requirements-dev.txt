@@ -2,4 +2,5 @@
 pytest-flask
 click
 geopy
-pylint
+flake8
+honcho
