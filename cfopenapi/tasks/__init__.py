@@ -9,7 +9,6 @@ def refresh_boards():
     from ..championship.board import CFGamesBoard
 
     from pymongo import UpdateOne
-    from decouple import config, Csv
     from bson.objectid import ObjectId
     from datetime import datetime
 
@@ -19,7 +18,7 @@ def refresh_boards():
     entity_db = connect("MONGO_READONLY").entitydb
     ranking_db = connect().rankingdb
 
-    open_boards = entity_db.find({"name": { "$in": available_boards }})
+    open_boards = entity_db.find({"name": {"$in": available_boards}})
 
     uuids = [result["_id"] for result in open_boards]
 

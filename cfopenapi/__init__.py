@@ -1,11 +1,10 @@
 from flask import Flask
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 from .blueprints import debug, cfopen, core
 from .extensions import celery, celeryconfig
 
 from . import settings
-from . import tasks
 
 
 version = '1.0.0'
@@ -19,6 +18,7 @@ def _init_celery(app):
 
     class ContextTask(TaskBase):
         abstract = True
+
         def __call__(self, *args, **kwargs):
             with app.app_context():
                 return TaskBase.__call__(self, *args, **kwargs)

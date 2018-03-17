@@ -14,9 +14,9 @@ divisions = {'1': 'Men (18-34)', '2': 'Women (18-34)',
 
              # Leaderboards combination
              # Male
-             "Masculino":'Men (18-34) Men (45-49) Men (50-54) Men (55-59) '
-                         'Men (60+) Men (40-44) Boys (14-15) Boys (16-17) '
-                         'Men (35-39)',
+             "Masculino": 'Men (18-34) Men (45-49) Men (50-54) Men (55-59) '
+                          'Men (60+) Men (40-44) Boys (14-15) Boys (16-17) '
+                          'Men (35-39)',
 
              # Male
              "Feminino": 'Women (18-34) Women (45-49) Women (50-54) '
@@ -131,7 +131,7 @@ class Athlete(Base):
             scores = [{'rank': score['rank'],
                        'scoreDisplay': score['scoreDisplay'],
                        'score': score['score']
-                      } for score in athlete['scores']]
+                       } for score in athlete['scores']]
 
             response.append({
                 'affiliateName': athlete['affiliateName'],
@@ -159,8 +159,8 @@ class Board(Base):
             # RX
             rx = [athl for athl in board
                   if not athl["scores"][w]['scaled'] and
-                     not athl["scores"][w]['scoreDisplay'] == '--' and
-                     not athl["scores"][w]['dumb']]
+                  not athl["scores"][w]['scoreDisplay'] == '--' and
+                  not athl["scores"][w]['dumb']]
             rx = sorted(rx, key=lambda x: (int(x["scores"][w]['score']),
                                            x["scores"][w]['time']),
                         reverse=True)
@@ -168,8 +168,8 @@ class Board(Base):
             # SCALE
             scale = [athl for athl in board
                      if athl["scores"][w]['scaled'] and
-                        not athl["scores"][w]['scoreDisplay'] == '--' and
-                        not athl["scores"][w]['dumb']]
+                     not athl["scores"][w]['scoreDisplay'] == '--' and
+                     not athl["scores"][w]['dumb']]
             scale = sorted(scale, key=lambda x: (int(x["scores"][w]['score']),
                                                  x["scores"][w]['time']),
                            reverse=True)
@@ -177,7 +177,7 @@ class Board(Base):
             # NOT PERFORMED
             not_performed = [athl for athl in board
                              if athl["scores"][w]['scoreDisplay'] == '--' and
-                                not athl["scores"][w]['dumb']]
+                             not athl["scores"][w]['dumb']]
 
             Board.update_rank_by_wod(rx + scale + not_performed, w)
 

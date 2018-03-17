@@ -44,12 +44,13 @@ def get_random_string(length=12,
                 ('%s%s%s' % (random.getstate(),
                              time.time(),
                              hexlify(os.urandom(random_with_N_digits(3)))
-                            )
-                ).encode()
+                             )
+                 ).encode()
             ).digest()
         )
 
     return ''.join(random.choice(allowed_chars) for i in range(length))
+
 
 chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 print(get_random_string(50, chars))

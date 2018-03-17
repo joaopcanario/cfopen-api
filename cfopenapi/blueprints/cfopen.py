@@ -1,10 +1,8 @@
 from flask import Blueprint, jsonify, request
-from bson.json_util import dumps
 
 from ..database import connect
 from ..championship.board import Athlete
 
-import collections
 
 cfopen_bp = Blueprint("cfopen_bp", __name__)
 

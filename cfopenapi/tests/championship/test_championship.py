@@ -1,7 +1,6 @@
 from cfopenapi.championship.board import (Athlete, Board,
                                           CFGamesBoard, divisions)
 
-import pytest
 import json
 
 

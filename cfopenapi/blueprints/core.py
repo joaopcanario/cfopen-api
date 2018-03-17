@@ -8,5 +8,5 @@ core_bp = Blueprint("core_bp", __name__)
 def root():
     try:
         return redirect(url_for('flasgger.apidocs')), 302
-    except:
+    except Exception:
         return jsonify("API Documentation isn't loaded!"), 200
