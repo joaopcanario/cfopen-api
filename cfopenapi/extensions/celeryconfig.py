@@ -13,5 +13,9 @@ CELERYBEAT_SCHEDULE = {
     'refresh_leaderboards': {
         'task': 'cfopenapi.tasks.refresh_boards',
         'schedule': crontab(minute='0', hour='*/4'),
+    },
+    'refresh_cfba_leaderboards': {
+        'task': 'cfopenapi.tasks.refresh_cfbaboards',
+        'schedule': crontab(minute='0', hour='*/1'),
     }
 }

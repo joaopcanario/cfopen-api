@@ -73,8 +73,8 @@ class Score(Base):
 
 
 class Athlete(Base):
-    def __init__(self, competitor_id, competitor_name, affiliate_name,
-                 division, profile_pic, scores,
+    def __init__(self, competitor_name, affiliate_name,
+                 division, profile_pic, scores, competitor_id=0,
                  num_of_ordinals=6):
         super().__init__()
 
@@ -111,13 +111,13 @@ class Athlete(Base):
 
             atl = atl.get('entrant', atl)
 
-            athlete = cls(atl["competitorId"],
-                          atl["competitorName"],
-                          atl["affiliateName"],
-                          atl['divisionId'],
-                          atl["profilePicS3key"],
-                          scores,
-                          num_of_ordinals=ordinal).asdict()
+            athlete = cls(competitor_name=atl["competitorName"],
+                          affiliate_name=atl["affiliateName"],
+                          division=atl['divisionId'],
+                          profile_pic=atl["profilePicS3key"],
+                          scores=scores,
+                          num_of_ordinals=ordinal,
+                          competitor_id=atl["competitorId"]).asdict()
 
             athletes_page.append(athlete)
 

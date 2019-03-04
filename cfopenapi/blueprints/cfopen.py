@@ -103,3 +103,73 @@ def leaderboards():
     response = Athlete.from_list_to_leaderboard(result['athletes'])
 
     return jsonify(response), 200
+
+
+@cfopen_bp.route('/cfba', methods=['GET'])
+def cfba():
+    '''
+    CFBA Barra custom leaderboards
+    Get CFBA Barra leaderboard filtered by genders, male (M) or female (F).
+
+    __Available leaderboards__
+
+    - CFBA Barra
+
+    ---
+    tags:
+      - Open
+    summary: Get custom leaderboard
+    parameters:
+      - name: gender
+        in: query
+        description: Athletes gender.
+        type: string
+        required: true
+    responses:
+      200:
+        description: Ranking of athletes by gender
+        schema:
+            type: object
+            properties:
+                ranking:
+                    type: array
+                    items:
+                        schema:
+                            properties:
+                                affiliateName:
+                                    type: string
+                                competitorName:
+                                    type: string
+                                overallScore:
+                                    type: string
+                                profilePic:
+                                    type: string
+                                scores:
+                                    type: array
+                                    items:
+                                        schema:
+                                            properties:
+                                                scoreDisplay:
+                                                    type: string
+                                                rank:
+                                                    type: string
+                                                score:
+                                                    type: string
+    '''
+    gender = request.args.get('gender')
+
+    mongo = connect("MONGO_READONLY")
+
+    if not gender:
+        return jsonify(f'Missing required parameters: gender={gender}'), 200
+    elif gender not in ['M', 'F']:
+        return jsonify('Gender must be M or F'), 200
+
+    division = "Masculino" if gender == "M" else "Feminino"
+
+    filter_search = {"uuid": f"dj8bd2j7et4fjxa01f_{division}"}
+    result = mongo.rankingcfbadb.find_one(filter_search)
+
+    response = Athlete.from_list_to_leaderboard(result['athletes'])
+
+    return jsonify(response), 200
