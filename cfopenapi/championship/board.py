@@ -50,26 +50,10 @@ class Score(Base):
         self.scoreDisplay = score.get("scoreDisplay")
         self.scoreDisplay = self.scoreDisplay if self.scoreDisplay else '--'
 
-        self.scaled = ' - s' in self.scoreDisplay
+        self.scaled = int(score.get("scaled", 0))
         self.rank = 0
 
         self.dumb = dumb
-
-    def _score_from_display(self):
-        import re
-
-        pattern = re.compile(r'( - s)|( reps)')
-        self.scoreDisplay = pattern.sub("", self.scoreDisplay)
-
-        if ':' in self.scoreDisplay:
-            max_reps = [0, 0, 0, 0, 0]
-
-            ddisplay = enumerate(reversed(self.scoreDisplay.split(":")))
-            seconds = sum(int(x) * 60 ** i for i, x in ddisplay)
-
-            return (max_reps[self.ordinal] / seconds) + max_reps[self.ordinal]
-
-        return int(self.scoreDisplay)
 
 
 class Athlete(Base):
