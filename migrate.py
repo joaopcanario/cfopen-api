@@ -32,7 +32,7 @@ abbrv = {'AC': 'Acre', 'AL': 'Alagoas', 'AP': 'Amapá', 'AM': 'Amazonas',
 
 
 def connect(uri="MONGO_URI"):
-    client = MongoClient(config(uri))
+    client = MongoClient(config(uri), retryWrites=False)
     mongo = client[config('MONGO_DBNAME')]
 
     return mongo

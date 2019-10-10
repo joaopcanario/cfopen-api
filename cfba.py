@@ -11,8 +11,7 @@ def main():
              'https://www.googleapis.com/auth/drive']
 
     credentials = SAC.from_json_keyfile_name(
-        '.cfba-open-2019-leaderboard-03a17aededed.json',
-        SCOPE)
+        '.cfba-leaderboard.json', SCOPE)
 
     SHT_KEY = '1oFARk7B5gKDQBIIuYGiQPtIXyD45KNwIS2InzQwElVQ'
 
@@ -23,7 +22,7 @@ def main():
         from pymongo import MongoClient
         from decouple import config
 
-        client = MongoClient(config(uri))
+        client = MongoClient(config(uri), retryWrites=False)
         mongo = client[config('MONGO_DBNAME')]
 
         return mongo

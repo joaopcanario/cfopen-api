@@ -8,4 +8,6 @@
 *.sqlite3
 *.pyc
 
+.cfba-leaderboard.json
+
 __pycache__
