@@ -83,7 +83,6 @@ def upboards():
 @main.command('cfbaboards', help='Update CFBA Ranking with last results.')
 def cfbaboards():
     from cfopenapi.championship.board import Board, Athlete
-    from bson.objectid import ObjectId
     from datetime import datetime
 
     athletescfba_db = connect("MONGO_READONLY").athletescfbadb
@@ -155,7 +154,7 @@ def affiliates():
             location = Location(country, city, state,
                                 {"latitude": aff[:2][0],
                                  "longitude": aff[:2][1]})
-        except Exception as e:
+        except Exception:
             location = Location('None', 'None', 'None', 'None')
 
         click.echo(f"{aff[2]} from {location.country}")

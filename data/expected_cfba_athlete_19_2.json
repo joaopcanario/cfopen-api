@@ -1,0 +1,59 @@
+[
+  {
+    "entrant": {
+      "competitorId": "0",
+      "competitorName": "João Paulo Canário",
+      "profilePicS3key": "pukie.png",
+      "affiliateName": "CFBA Barra",
+      "divisionId": "1",
+      "gender": "M"
+    },
+    "scores": [
+      {
+        "ordinal": 1,
+        "rank": 0,
+        "score": "11790000",
+        "scoreDisplay": "179 reps",
+        "scaled": 0,
+        "time": 0,
+        "dumb": false
+      },
+      {
+        "ordinal": 2,
+        "rank": 0,
+        "score": "11091063",
+        "scoreDisplay": "109 reps",
+        "scaled": 0,
+        "time": 1063,
+        "dumb": false
+      },
+      {
+        "ordinal": 3,
+        "scoreDisplay": "--",
+        "score": "0",
+        "time": 0,
+        "scaled": false,
+        "rank": 0,
+        "dumb": true
+      },
+      {
+        "ordinal": 4,
+        "scoreDisplay": "--",
+        "score": "0",
+        "time": 0,
+        "scaled": false,
+        "rank": 0,
+        "dumb": true
+      },
+      {
+        "ordinal": 5,
+        "scoreDisplay": "--",
+        "score": "0",
+        "time": 0,
+        "scaled": false,
+        "rank": 0,
+        "dumb": true
+      }
+    ]
+  }
+]

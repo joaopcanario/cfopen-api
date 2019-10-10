@@ -24,6 +24,13 @@ divisions = {'1': 'Men (18-34)', '2': 'Women (18-34)',
                          'Girls (14-15) Girls (16-17) Women (35-39)'}
 
 
+# wods = {'2019': {0: {'timecap': 480, 'tiebreak': 0, 'max_reps': 0},
+#                  1: {'timecap': 1200, 'tiebreak': 1, 'max_reps': 430},
+#                  2: {'timecap': 0, 'tiebreak': 0, 'max_reps': 0},
+#                  3: {'timecap': 0, 'tiebreak': 0, 'max_reps': 0},
+#                  4: {'timecap': 0, 'tiebreak': 0, 'max_reps': 0}}}
+
+
 Ranking = namedtuple('Ranking', 'uuid name last_update athletes')
 
 
@@ -42,10 +49,9 @@ class Score(Base):
 
         self.ordinal = ordinal
 
-        self.score = score.get("score")
-
         self.time = score.get("time", 0)
         self.time = self.time if self.time else 0
+        # self.time = self.time_to_seconds(score.get("time", 0))
 
         self.scoreDisplay = score.get("scoreDisplay")
         self.scoreDisplay = self.scoreDisplay if self.scoreDisplay else '--'
@@ -54,6 +60,30 @@ class Score(Base):
         self.rank = 0
 
         self.dumb = dumb
+
+        # if not score.get("calculate", 0):
+        self.score = score.get("score")
+        # else:
+        #     self.score = self.calculate_score(score.get("score"))
+
+    # def time_to_seconds(self, time):
+    #     if isinstance(time, str):
+    #         if ':' in time:
+    #             minutes, seconds = time.split(':')
+    #             return int(minutes) * 60 + int(seconds)
+
+    #         if not time:
+    #             return 0
+
+    #     return int(time)
+
+    # def calculate_score(self, reps):
+    #     tiebreak = wods['2019'].get(self.ordinal).get('tiebreak')
+    #     timecap = wods['2019'].get(self.ordinal).get('timecap')
+    #     rx = int(not self.scaled)
+
+    #     t = timecap - self.time if tiebreak else self.time
+    #     return f'{rx}{reps:03}{t:04}'
 
 
 class Athlete(Base):
