@@ -16,7 +16,8 @@ def main():
     SHT_KEY = '1oFARk7B5gKDQBIIuYGiQPtIXyD45KNwIS2InzQwElVQ'
 
     Athlete = namedtuple('Athlete', ['name', 'surname', 'gender'])
-    # WOD = namedtuple('WOD', ['reps', 'tiebreak', 'scaled'])
+    WOD = namedtuple('WOD', ['reps', 'tiebreak', 'scaled',
+                             'has_tiebreak', 'timecap', 'max_reps'])
 
     def connect(uri="MONGO_URI"):
         from pymongo import MongoClient
@@ -38,23 +39,33 @@ def main():
 
         return int(t)
 
-    def calculate_score(reps, scaled, tiebreak, timecap,
-                        has_tiebreak, max_reps):
-        if reps:
-            rx = int(not scaled)
-            time = tiebreak_to_value(tiebreak)
-            t = timecap - time if has_tiebreak else time
-            s = ' - s' if scaled else ''
+    def calculate_score(wod):
+        if wod.reps:
+            rx = int(not wod.scaled)
+            s = ' - s' if wod.scaled else ''
+            reps = wod.max_reps if ':' in wod.reps else wod.reps
 
-            score = f'{rx}{int(reps):03}{t:04}'
+            if wod.has_tiebreak:
+                time = tiebreak_to_value(wod.tiebreak)
+                t = wod.timecap - time
+            elif ':' in wod.reps:
+                time = tiebreak_to_value(wod.reps)
+                t = wod.timecap - time
+            else:
+                t = 0
 
-            if not has_tiebreak:
-                display = f'{reps} reps{s}'
-            elif has_tiebreak:
-                if int(reps) < max_reps:
+            score = f'{rx}{int(reps):04}{t:04}'
+
+            if not wod.has_tiebreak:
+                if int(reps) == wod.max_reps:
+                    display = f'{wod.reps}'
+                elif int(reps) < wod.max_reps:
                     display = f'{reps} reps{s}'
-                elif int(reps) == max_reps:
-                    display = f'{tiebreak}{s}'
+            elif wod.has_tiebreak:
+                if int(reps) < wod.max_reps:
+                    display = f'{reps} reps{s}'
+                elif int(reps) == wod.max_reps:
+                    display = f'{wod.tiebreak}{s}'
         else:
             display = '--'
             score = 0
@@ -72,7 +83,11 @@ def main():
 
     for i, r in enumerate(content[1:]):
         atlhete = Athlete(name=r[0], surname=r[1], gender=r[2])
-        # wod_1 = WOD(reps=r[3], tiebreak=0, scaled=int(r[4] == "SIM"))
+
+        wod_1 = WOD(reps=r[3], tiebreak=0, scaled=int(r[4].upper() == "SIM"),
+                    has_tiebreak=False, timecap=900, max_reps=180)
+        sc_1, ds_1 = calculate_score(wod_1)
+
         # wod_2 = WOD(reps=r[5], tiebreak=r[6], scaled=int(r[7] == "SIM"))
         # wod_3 = WOD(reps=r[8], tiebreak=r[9], scaled=int(r[10] == "SIM"))
         # wod_4 = WOD(reps=r[11], tiebreak=r[12], scaled=int(r[13] == "SIM"))
@@ -87,25 +102,15 @@ def main():
                 "gender": atlhete.gender
             },
             "scores": [
-                # {
-                #     "ordinal": 0,
-                #     "rank": 0,
-                #     "score": calculate_score(wod_1.reps,
-                #                              wod_1.scaled,
-                #                              tiebreak=0,
-                #                              timecap=480,
-                #                              has_tiebreak=False,
-                #                              max_reps=1000000)[0],
-                #     "scoreDisplay": calculate_score(wod_1.reps,
-                #                                     wod_1.scaled,
-                #                                     tiebreak=0,
-                #                                     timecap=480,
-                #                                     has_tiebreak=False,
-                #                                     max_reps=1000000)[1],
-                #     "scaled": wod_1.scaled,
-                #     "time": 0,
-                #     "dumb": False
-                # },
+                {
+                    "ordinal": 0,
+                    "rank": 0,
+                    "score": sc_1,
+                    "scoreDisplay": ds_1,
+                    "scaled": wod_1.scaled,
+                    "time": tiebreak_to_value(wod_1.tiebreak),
+                    "dumb": False
+                }
                 # {
                 #     "ordinal": 1,
                 #     "rank": 0,
