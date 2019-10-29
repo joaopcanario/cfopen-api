@@ -88,8 +88,14 @@ def main():
                     has_tiebreak=False, timecap=900, max_reps=180)
         sc_1, ds_1 = calculate_score(wod_1)
 
-        # wod_2 = WOD(reps=r[5], tiebreak=r[6], scaled=int(r[7] == "SIM"))
-        # wod_3 = WOD(reps=r[8], tiebreak=r[9], scaled=int(r[10] == "SIM"))
+        wod_2 = WOD(reps=r[5], tiebreak=0, scaled=int(r[6].upper() == "SIM"),
+                    has_tiebreak=False, timecap=1200, max_reps=10000000)
+        sc_2, ds_2 = calculate_score(wod_2)
+
+        wod_3 = WOD(reps=r[7], tiebreak=r[8],
+                    scaled=int(r[9].upper() == "SIM"),
+                    has_tiebreak=True, timecap=540, max_reps=165)
+        sc_3, ds_3 = calculate_score(wod_3)
         # wod_4 = WOD(reps=r[11], tiebreak=r[12], scaled=int(r[13] == "SIM"))
 
         athlete = {
@@ -110,60 +116,30 @@ def main():
                     "scaled": wod_1.scaled,
                     "time": tiebreak_to_value(wod_1.tiebreak),
                     "dumb": False
-                }
-                # {
-                #     "ordinal": 1,
-                #     "rank": 0,
-                #     "score": calculate_score(wod_2.reps,
-                #                              wod_2.scaled,
-                #                              wod_2.tiebreak,
-                #                              timecap=1200,
-                #                              has_tiebreak=True,
-                #                              max_reps=430)[0],
-                #     "scoreDisplay": calculate_score(wod_2.reps,
-                #                                     wod_2.scaled,
-                #                                     wod_2.tiebreak,
-                #                                     timecap=1200,
-                #                                     has_tiebreak=True,
-                #                                     max_reps=430)[1],
-                #     "scaled": wod_2.scaled,
-                #     "time": tiebreak_to_value(wod_2.tiebreak),
-                #     "dumb": False
-                # },
-                # {
-                #     "ordinal": 2,
-                #     "rank": 0,
-                #     "score": calculate_score(wod_3.reps,
-                #                              wod_3.scaled,
-                #                              wod_3.tiebreak,
-                #                              timecap=600,
-                #                              has_tiebreak=True,
-                #                              max_reps=180)[0],
-                #     "scoreDisplay": calculate_score(wod_3.reps,
-                #                                     wod_3.scaled,
-                #                                     wod_3.tiebreak,
-                #                                     timecap=600,
-                #                                     has_tiebreak=True,
-                #                                     max_reps=180)[1],
-                #     "scaled": wod_3.scaled,
-                #     "time": tiebreak_to_value(wod_3.tiebreak),
-                #     "dumb": False
-                # },
+                },
+                {
+                    "ordinal": 1,
+                    "rank": 0,
+                    "score": sc_2,
+                    "scoreDisplay": ds_2,
+                    "scaled": wod_2.scaled,
+                    "time": tiebreak_to_value(wod_2.tiebreak),
+                    "dumb": False
+                },
+                {
+                    "ordinal": 2,
+                    "rank": 0,
+                    "score": sc_3,
+                    "scoreDisplay": ds_3,
+                    "scaled": wod_3.scaled,
+                    "time": tiebreak_to_value(wod_3.tiebreak),
+                    "dumb": False
+                },
                 # {
                 #     "ordinal": 3,
                 #     "rank": 0,
-                #     "score": calculate_score(wod_4.reps,
-                #                              wod_4.scaled,
-                #                              wod_4.tiebreak,
-                #                              timecap=720,
-                #                              has_tiebreak=True,
-                #                              max_reps=132)[0],
-                #     "scoreDisplay": calculate_score(wod_4.reps,
-                #                                     wod_4.scaled,
-                #                                     wod_4.tiebreak,
-                #                                     timecap=720,
-                #                                     has_tiebreak=True,
-                #                                     max_reps=132)[1],
+                #     "score": sc_4,
+                #     "scoreDisplay": ds_4,
                 #     "scaled": wod_4.scaled,
                 #     "time": tiebreak_to_value(wod_4.tiebreak),
                 #     "dumb": False
